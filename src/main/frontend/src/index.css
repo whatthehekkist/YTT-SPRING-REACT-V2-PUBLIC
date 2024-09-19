@@ -1,0 +1,116 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#myNav {
+  display: flex;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
+  justify-content:space-around; 
+  padding: 1rem;
+  /* font-size: xx-large; */
+}
+
+#myNav a {
+  font-size: 6.0vw;
+  margin: auto auto;
+}
+
+.transcription {
+  background-color: '#212529';
+}
+
+/*loading spinner*/
+/* https://stackoverflow.com/questions/74991443/how-can-i-make-loader-cover-the-all-page */
+.loader-wrapper {
+  width: 100%;
+  height: 100%;
+  /* position: absolute; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #181818;
+  /* background-color: #504949b7; */
+  opacity: 0.65;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.loader {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  border: 4px solid #Fff;
+  animation: loader 3s infinite ease;
+}
+.loader-inner {
+  vertical-align: top;
+  display: inline-block;
+  width: 100%;
+  background-color: #fff;
+  animation: loader-inner 3s infinite ease-in;
+}
+
+@keyframes loader {
+  0% { transform: rotate(0deg);}
+  25% { transform: rotate(180deg);}
+  50% { transform: rotate(180deg);}
+  75% { transform: rotate(360deg);}
+  100% { transform: rotate(360deg);}
+  
+}
+
+@keyframes loader-inner {
+  0% { height: 0%;}
+  25% { height: 0%;}
+  50% { height: 100%;}
+  75% { height: 100%;}
+  100% { height: 0%;}
+}
+
+
+/* .loader-wrapper:after{
+  content: "Loading text";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
+} */
+
+#loader-text {
+  font-family: sans-serif;
+  text-align: center;
+ }
+
+
+/*loading spinner alt*/
+/* https://anerim.tistory.com/221 */
+.loading-background {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: #ffffffb7;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

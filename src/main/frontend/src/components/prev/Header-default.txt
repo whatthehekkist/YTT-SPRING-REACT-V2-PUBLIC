@@ -1,0 +1,76 @@
+import React from 'react';
+import {
+  Container,
+  Nav,
+  Navbar,
+  Button,
+  Badge,
+} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+// const {element, onMoveToElement} ='../hooks/scroll';
+import useMoveScroll from "../hooks/scroll";
+
+function Header({ scrollToSection }) {
+// const Header = ({ scrollElem }) => {
+// const Header = ({ scrollElem1, scrollElem2 }) => {
+// const Header = () => {
+  // const sectionRef = useRef(null);
+  // const scrollToSection = () => {
+  //   sectionRef.current.scrollIntoView({ behavior: 'smooth' });
+  // };
+
+  // const scrollCallBack = () =>{
+  //   document.getElementById('transcription').scrollIntoView()
+  // }  
+
+  // const element1 = useMoveScroll();
+	// const element2 = useMoveScroll();
+	// const element3 = useMoveScroll();
+	// const element = [element1, element2, element3];
+	// const scrollToTop = useMoveScroll();
+
+  return (
+    <>
+    <div>
+    <Navbar fluid bg="dark" variant="dark" expand="lg" className='sticky-top' style={{ height: '50vh', backgroundColor: '#e0e0e0' }}>
+      <Container fluid>
+      <Link to="/" className="navbar-brand text-white" onClick={() => scrollToSection(0)}>
+                  <h1>YTT</h1>
+              </Link>
+        <Navbar id="navbarScroll">
+          <Nav
+            className="me-auto mx-5 my-2 my-lg-0"
+            style={{ maxHeight: '100px'}}
+            navbarScroll
+          >
+              {/* <Link to="/" className="navbar-brand text-white" onClick={() => scrollToSection(0)}>
+                  YTT
+              </Link> */}
+
+              <Link className="navbar-brand text-white">
+                <Badge bg="dark" variant="secondary" as={Button} onClick={() => scrollToSection(1)}>
+                    Transcription_List
+                </Badge>
+              </Link>
+
+              <Link className="navbar-brand text-white">
+                <Badge bg="dark" variant="secondary" as={Button} onClick={() => scrollToSection(2)}>
+                    Transcription
+                </Badge>
+              </Link>
+              
+          </Nav>
+        </Navbar>
+      </Container>
+    </Navbar>
+
+    <div>sdafdsfdsdsfsdf</div>
+    </div>
+    </>
+    
+  );
+
+// };
+};
+
+export default Header;

@@ -1,0 +1,128 @@
+import React, { useContext, useState, useEffect } from 'react';
+import LoadingSpinner from '../components/Spinner';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+import {
+    Container,
+    Accordion,
+    Button,
+} from 'react-bootstrap';
+import TEXTS from '../local-data/Texts';
+import { RandomDocumentsContext } from '../context/RandomDocContext';
+
+const GetDoc = () => {
+
+    const { randomDocs, loadingRandomDocs, errorRandomDocs } = useContext(RandomDocumentsContext);
+
+    const history = useNavigate();
+    const propsParam = useParams();
+    const id = propsParam.id;
+    console.log("at GetDoc.js: ", id);
+
+    const [doc, setDocument] = useState([]);
+    const [loading, setLoading] = useState(true); // 로딩 상태 추가
+    const [error, setError] = useState(null); // 에러 상태 추가
+
+    useEffect(() => {
+        const fetchDocuments = async () => {
+            try {
+                const response = await axios.get('http://localhost:8888/' + id);
+                setDocument(response.data);
+                console.log(response.data)
+
+            } catch (error) {
+                console.error("Error fetching documents:", error); // 에러 메시지 출력
+                setError(error); // 에러 상태 설정
+            } finally {
+                setLoading(false); // 로딩 완료
+            }
+        };
+        fetchDocuments();
+
+    }, [id]);
+
+
+    if (loadingRandomDocs || loading) return (<div><LoadingSpinner /></div>);
+    if (errorRandomDocs) {
+        return <div>Error fetching random documents: {errorRandomDocs.message}</div>;
+    }
+    if (error) {
+        return <div>Error fetching document: {error.message}</div>;
+    }
+
+    // function to send a GET request of a doc 
+    const fetchDocHandler = (id) => {
+        (id) ? history('/' + id) : alert("something went wrong..try again.");
+    };
+
+    return (
+        <>
+            <div className='text-center'>
+                <h1 id='transcription_list'>{TEXTS.TRANSCRIPTION_LIST.heading}</h1>
+                <p>
+                    {TEXTS.TRANSCRIPTION_LIST.desc1}<br/>
+                    {randomDocs ? (randomDocs.length) : ('Multiple')} {TEXTS.TRANSCRIPTION_LIST.desc2}
+                </p>
+
+                {randomDocs && randomDocs.length > 0 ? (
+                    randomDocs.map((doc, index) => (
+                        <div key={index}>
+                            <Button variant="light" 
+                                    className='m-1'
+                                    onClick={ () => fetchDocHandler(doc.id)} 
+                            >
+                                {doc.title}
+                            </Button>
+                        </div>
+                    ))
+                ) : (
+                    <p>No random documents found.</p>
+                )}
+            </div>
+
+            <Container className="bg-dark mt-5">
+
+                if ( doc && doc.length `{'>'}` 0 ) `{'{'}` {/* what the... f */}
+                    <h3 id="transcription" className='text-white text-center mb-3'>{doc.title}</h3>
+                    {doc.captionTracks.map((captionTrack, captionTracksIndex) => (
+
+                        <Accordion defaultActiveKey="0" key={captionTracksIndex}>
+                            <Accordion.Item className='mt-2'>
+                                <Accordion.Header>{captionTrack.name}</Accordion.Header>
+                                <Accordion.Body>
+                                    {captionTrack.script}
+                                </Accordion.Body>
+                            </Accordion.Item>
+                        </Accordion>
+
+                    ))}
+                    `{'}'}` else <p>no document fetched.</p>
+            
+            </Container>
+
+            {/* <Container className="bg-dark mt-5">
+            <h3 id="transcription" className='text-white text-center mb-3'>{doc && doc.title}</h3>
+            {doc && doc.length > 0} ? 
+                ( {doc.captionTracks.map((captionTrack, captionTracksIndex) => (
+
+                    <Accordion defaultActiveKey="0" key={captionTracksIndex}>
+                        <Accordion.Item className='mt-2'>
+                            <Accordion.Header>{captionTrack.name}</Accordion.Header>
+                            <Accordion.Body>
+                                {captionTrack.script}
+                            </Accordion.Body>
+                        </Accordion.Item>
+                    </Accordion>
+
+                ))} )
+                : ( <p>no document fetched.</p> )
+            </Container> */}
+
+        </>
+
+    );
+
+};
+
+export default GetDoc;
+// export default React.memo(GetDoc, equalComparison);
