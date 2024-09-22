@@ -14,7 +14,7 @@
 - React ^18.3.1
   - react-router-dom, react-dom, react-bootstrap, bootstrap, http-proxy-middleware, axios
 - Deployment: koyeb (git + buildpack)
-- git, intelli community
+- git, IntelliJ community
 
 # how to run the app in localhost
 `git clone https://github.com/whatthehekkist/YTT-SPRING-REACT-V2-PUBLIC.git`
