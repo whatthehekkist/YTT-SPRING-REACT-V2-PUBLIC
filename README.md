@@ -1,10 +1,10 @@
 # https://ytt.koyeb.app/
 
-- Server
+- Server (Spring)
   - GET `/randomdocs` responses with *N* random documents 
   - GET `/sampledoc` responses with a sample document
   - GET `/doc?id=:id` responses with a specific document
-- React
+- Cliient (React)
   - Route `/` renders 10 Youtube video titles by fetching documents from the endpoints `/randomdocs` and `/sampledoc` by default
   - Route `/doc/:id` renders a Youtube video caption data (by multiple languages if available), by fetching a single document from the endpoint `/doc?id=:id` when user clicks one of the Transcription list buttons 
 
