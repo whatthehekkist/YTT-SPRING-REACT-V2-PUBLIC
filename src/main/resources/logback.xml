@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configure>
+
+<configuration>
+
+    <property name="LOG_DIR" value="logs"/>
+    <property name="LOG_FILE" value="{LOG_DIR}/log-%d{yyyy-MM-dd}.%i.log"/>
+
+    <!--in use-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>-->
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_FILE}</file>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE_ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <maxHistory>30</maxHistory>
+            <fileNamePattern>${LOG_DIR}/log-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- <timeBasedFileNamingAndTriggeringPolicy clas="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"> -->
+            <maxFileSize>5MB</maxFileSize>
+            <!-- </timeBasedFileNamingAndTriggeringPolicy> -->
+        </rollingPolicy>
+    </appender>
+
+    <root level="info"> <!--trace-->
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+    <!--<root level="info"> &lt;!&ndash;trace&ndash;&gt;
+        <appender-ref ref="FILE_ROLLING"/>
+    </root>-->
+
+    <!--<logger name="org.springframework.web" level="debug">
+        <appender-ref ref="FILE" />
+    </logger>-->
+
+</configuration>
+
+<!--good ref-->
+<!-- https://loosie.tistory.com/829 -->

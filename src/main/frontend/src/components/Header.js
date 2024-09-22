@@ -10,7 +10,10 @@ function Header({ scrollToSection }) {
 
   const location = useLocation();
   useEffect(() => {
-    console.log(location.pathname);
+
+    (!location.search) ? 
+      console.log(location.pathname) : console.log(`${location.pathname}${location.search}`);
+
   }, [ location ])
 
 

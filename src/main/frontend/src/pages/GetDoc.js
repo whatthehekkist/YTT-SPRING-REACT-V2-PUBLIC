@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect, forwardRef } from 'react';
-import LoadingSpinner from '../components/Spinner';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import {
@@ -7,10 +6,11 @@ import {
     Accordion,
     Button,
 } from 'react-bootstrap';
+import LoadingSpinner from '../components/Spinner';
+import ScrollToTranscription from '../components/ScrollToTranscription';
 import TEXTS from '../local-data/Texts';
 import { RandomDocumentsContext } from '../context/RandomDocContext';
 import YouTubeEmbed from '../components/VideoEmbed';
-import ScrollToTranscription from '../components/ScrollToTranscription';
 
 
 const GetDoc = forwardRef(({ refs }) => {
@@ -23,16 +23,22 @@ const GetDoc = forwardRef(({ refs }) => {
     console.log("at GetDoc.js: ", id);
 
     const [doc, setDocument] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true); // 로딩 상태
+    const [error, setError] = useState(null); // 에러 상태
 
     useEffect(() => {
 
         const fetchDocuments = async () => {
+
             try {
+
+                // const response = await axios.get(`/doc/${id}`);
+
+                // req with query string
                 const response = await axios.get('/doc', {
-                    params: { id } // body
+                    params: { id }
                 });
+
                 setDocument(response.data);
                 console.log(response.data);
 
@@ -61,8 +67,8 @@ const GetDoc = forwardRef(({ refs }) => {
 
     // function to send a GET request of a doc 
     const fetchDocHandler = (id) => {
-        (id) ? history('/' + id) : alert("something went wrong..try again.");
-        // (id) ? history('/?id=' + id) : alert("something went wrong..try again.");
+        
+        (id) ? history(`/doc/${id}`) : alert("something went wrong..try again.");   
 
         /***
         // [ALT] ScrollToTranscription 
@@ -108,8 +114,9 @@ const GetDoc = forwardRef(({ refs }) => {
             </div>
 
             <div className='transcription' id="transcription" /*ref={transcriptionRef}*/ style={{ backgroundColor: '#212529' }} >
-            <Container ref={refs[1]} className="bg-dark mt-5 pt-3 pb-5">
+            <Container className="bg-dark mt-5 pt-5 pb-5 container">
                 
+                <h1 ref={refs[1]} className="text-center text-white">{TEXTS.TRANSCRIPTION.heading}</h1>
                 <Container className="mt-5 mb-5">
                     <YouTubeEmbed videoId={doc.videoId} title={doc.title} /> 
                 </Container>

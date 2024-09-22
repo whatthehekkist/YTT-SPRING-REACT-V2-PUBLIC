@@ -1,7 +1,14 @@
 HELP.md
 .gradle
+
 build/
 !gradle/wrapper/gradle-wrapper.jar
+
+# option for heroku or koyeb
+#!gradle/wrapper/
+#!build/libs/*.jar
+
+
 !**/src/main/**/build/
 !**/src/test/**/build/
 

@@ -27,7 +27,7 @@ const HomeButton = () => {
                 cursor: 'pointer',
             }}
         >
-            <span style={{fontSize: '3vw'}}>🏠</span>
+            <span style={{fontSize: '30px'}}>🏠</span>
         </button>
     );
 };

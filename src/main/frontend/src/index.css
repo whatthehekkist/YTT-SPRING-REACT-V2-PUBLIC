@@ -20,7 +20,7 @@ code {
   flex-direction: column;
   /* flex-wrap: wrap; */
   justify-content:space-around; 
-  padding: 1rem;
+  padding: 1rem; /* 패딩 추가 */
   /* font-size: xx-large; */
 }
 

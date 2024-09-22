@@ -7,7 +7,10 @@ export default function ScrollToTranscription() {
   useEffect(() => {
     // window.onload = () => {
       const element = document.getElementById("transcription");
-      window.scrollTo(0, element.offsetTop);
+      
+      // window.scrollTo(0, element.offsetTop);
+      window.scrollTo({ top: element.offsetTop, behavior:'smooth'});
+      
     // }    
   }, [pathname]);
 

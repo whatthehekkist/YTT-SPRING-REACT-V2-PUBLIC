@@ -1,4 +1,5 @@
-// local dev only for CORS issue, otherwise, delete or comment out
+// This is for local dev only to resolve CORS issue over port use between Spring and React
+// delete or comment out for web deploy
 
 package com.example.ytt.config;
 

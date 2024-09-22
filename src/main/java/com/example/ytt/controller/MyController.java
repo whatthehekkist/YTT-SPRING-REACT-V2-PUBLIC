@@ -1,57 +1,103 @@
 package com.example.ytt.controller;
 
-import com.example.ytt.document.MyDocument;
+import com.example.ytt.domain.MyDocument;
 import com.example.ytt.service.MyService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 import java.util.ListIterator;
 
 @RestController
-@RequestMapping("/")
+//@CrossOrigin(origins = "http://localhost:3000")
+//@RequestMapping("/")
 public class MyController {
 
     @Autowired
     private MyService service;
 
+    private static final Logger logger = LoggerFactory.getLogger(MyController.class);
+
     @GetMapping("/randomdocs")
     public List<MyDocument> getRandomDocs() {
 
-        System.out.println("\n------------- MyController.getRandomDocs() -------------");
+        logger.info("\n----- MyController.getRandomDocs() -----");
         List<MyDocument> docs = service.getRandomDocs();
-        System.out.println(docs);
-        System.out.println(docs.size());
+
+        logger.info(docs.toString());
+        logger.info(String.valueOf(docs.size()));
 
         ListIterator<MyDocument> iterator = docs.listIterator();
         while (iterator.hasNext()){
-            System.out.println(iterator.next().getTitle());
+            logger.info(iterator.next().getTitle());
         }
         return docs;
     }
 
     @GetMapping("/sampledoc")
-    public ResponseEntity<?> getSampleDoc() {
-        return new ResponseEntity<>(service.getSampleDoc(), HttpStatus.OK); // 200 응답
+    public /*MyDocument*/ ResponseEntity<?> getSampleDoc() {
+
+        logger.info("\n---- MyController.getSampleDoc() -----");
+
+        MyDocument doc = service.getSampleDoc();
+        logger.info("doc.getId(): {}", doc.getId());
+
+        return new ResponseEntity<>(doc, HttpStatus.OK);
     }
 
-    // path variable 사용시, 데이터는 문제없으나, client에서 렌더링 안되는 문제 발생
-    // server: query string /doc?id=:id 로 변경
+    // /doc?id=:id
     @GetMapping("/doc")
-    public MyDocument getDocumentById(@RequestParam String id) {
-        return service.getDocumentById(id);
+    public /*MyDocument*/ ResponseEntity<?> getDocumentById(@RequestParam String id) {
+
+        logger.info("\n----- [Spring Boot] MyController.getDocumentById(@RequestParam String id) -----");
+
+        MyDocument doc = service.getDocumentById(id);
+        logger.info("doc.getId(): {}", doc.getId());
+
+        return new ResponseEntity<>(doc, HttpStatus.OK);
     }
 
-    /***
-    @GetMapping(value = "/{id}")
+    /* just ignore favicon req from client */
+    @GetMapping("favicon.ico")
+    public void ignoreFaviconAtRoot() {}
+
+    @GetMapping("/doc/favicon.ico")
+    public void ignoreFaviconAtDoc() {}
+
+
+    /* ************************************************** */
+    // NOT-IN-USE list
+
+    /*
+    // @GetMapping(value = "/{id}")
+    @GetMapping("/doc/{id}")
     public MyDocument getDocumentById(@PathVariable String id) {
-        return service.getDocumentById(id);
-    }***/
+
+        logger.info("\n----- [Spring Boot] MyController.getDocumentById(@PathVariable String id) -----");
+
+        MyDocument doc = service.getDocumentById(id);
+
+        logger.info("doc.getId(): {}", doc.getId());
+
+        return doc;
+    }*/
 
     /*@GetMapping("/documents")
     public ResponseEntity<?> getAllDocuments() {
         return new ResponseEntity<>(service.getAllDocuments(), HttpStatus.OK); // 200 응답
     }*/
+
+    /*
+    @CrossOrigin
+    @GetMapping("/")
+    public String redirect() {
+        return "forward:/index.html";
+    }*/
+
+
 }

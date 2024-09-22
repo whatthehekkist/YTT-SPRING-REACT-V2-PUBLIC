@@ -1,12 +1,13 @@
 import React, { useRef } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
+import ScrollToTop from "./components/ScrollToTop";
+import StickyHome from './components/StickyHome';
 import Home from './pages/Home';
 import GetDoc from './pages/GetDoc';
 import RandomDocumentsProvider from './context/RandomDocContext';
 import SampleDocumentProvider from './context/SampleDocContext';
-import ScrollToTop from "./components/ScrollToTop";
-import StickyHome from './components/StickyHome';
+
 
 function App() {
 
@@ -25,8 +26,7 @@ function App() {
 			<RandomDocumentsProvider>
 				<SampleDocumentProvider>
 					<Routes>
-					
-						{/* <Route path="/" element={<Home />} /> */}
+
 						<Route 	
 							exact path="/" 
 							element={
@@ -36,9 +36,8 @@ function App() {
 							} 
 						/>
 						
-						{/* <Route path="/:id" element={<GetDoc />} /> */}
 						<Route 	
-							exact path="/:id" 
+							path="/doc/:id"
 							element={
 								<GetDoc refs={sections} 
 										titles={["Home", "Transcription List", "Transcription"]} 
