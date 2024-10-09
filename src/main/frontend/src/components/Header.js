@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 
 function Header({ scrollToSection }) {
 
+  // for text content resolution at line 42
   const location = useLocation();
   useEffect(() => {
 
@@ -23,13 +24,21 @@ function Header({ scrollToSection }) {
 
       <div className='pt-5 mt-5'></div>
       <Link className="navbar-brand">
-        <Badge bg="dark" variant="secondary" as={Button} onClick={ () => scrollToSection(0) }>
+        <Badge bg="dark" 
+               variant="secondary" 
+               as={Button} 
+               onClick={ () => scrollToSection(0) } // init scrollToSection value 
+        > 
             Transcription List
         </Badge>
       </Link>
 
       <Link className="navbar-brand">
-        <Badge bg="dark" variant="secondary" as={Button} onClick={ () => scrollToSection(1) }>
+        <Badge bg="dark" 
+               variant="secondary" 
+               as={Button} 
+               onClick={ () => scrollToSection(1) } // init scrollToSection value 
+        > 
           {location.pathname === '/' ? ('Sample Transcription') : ('Transcription')}
         </Badge>
       </Link>
@@ -37,7 +46,7 @@ function Header({ scrollToSection }) {
       
     </div>
     </>
-    
+  
   );
 
 };

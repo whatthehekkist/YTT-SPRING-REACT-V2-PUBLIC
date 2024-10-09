@@ -11,6 +11,7 @@ import SampleDocumentProvider from './context/SampleDocContext';
 
 function App() {
 
+	// for in-page nav scroll on click
 	 const sections = [useRef(null), useRef(null), useRef(null)];
 	 const scrollToSection = (index) => {
 		if(sections[index].current) {
@@ -18,6 +19,7 @@ function App() {
         }
 	 };
 
+	// main component structure 
 	return (
 		<div>
 			<StickyHome />
@@ -31,7 +33,7 @@ function App() {
 							exact path="/" 
 							element={
 								<Home refs={sections} 
-										titles={["Home", "Transcription List", "Sample Transcription"]} 
+									  titles={["Home", "Transcription List", "Sample Transcription"]} 
 								/>
 							} 
 						/>

@@ -15,8 +15,10 @@ public interface DocRepository extends MongoRepository<MyDocument, String> {
     AggregationResults<MyDocument> random();
 
 
-    /*// https://bepoz-study-diary.tistory.com/435
+    /*
+    // https://bepoz-study-diary.tistory.com/435
     @Query(value = "{ 'sample': 10 } }", fields = "{'_id': 1, 'title': 1, 'url': 1, 'videoId': 1}")
-    List<MyDocument> findRandomDocs();*/
+    List<MyDocument> findRandomDocs();
+    */
 
 }

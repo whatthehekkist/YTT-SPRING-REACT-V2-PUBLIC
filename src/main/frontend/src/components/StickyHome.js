@@ -5,8 +5,14 @@ const HomeButton = () => {
 
     const history = useNavigate();
     const handleRedirect = () => {
-        //history('/');
+        
+        // history('/');
+
+        // Due to React's CSR native,
+        // it's unable to fetch random documents on clicking 🏠 icon
+        // Thus, go for replace("/") to force page refresh. Otherwise, history("/")
         window.location.replace("/") || history('/');
+
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 

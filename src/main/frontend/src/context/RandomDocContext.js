@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
+// a context that fetches data from the endpoint /randomdocs in Spring
 export const RandomDocumentsContext = createContext();
 
 const RandomDocumentsProvider = ({ children }) => {

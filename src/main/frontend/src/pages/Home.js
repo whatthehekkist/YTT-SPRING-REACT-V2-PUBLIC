@@ -7,14 +7,18 @@ import {
     Accordion,
     Button,
 } from 'react-bootstrap';
+import YouTubeEmbed from '../components/VideoEmbed';
 
+// contexts having each of data (random documents and sample document respectively)
 import { RandomDocumentsContext } from '../context/RandomDocContext';
 import { SampleDocumentContext } from '../context/SampleDocContext';
-import YouTubeEmbed from '../components/VideoEmbed';
+
 
 const Home = forwardRef(({ refs }) => {
 
     const history = useNavigate();
+
+    // reference RandomDocumentsContext and SampleDocumentContext
     const { randomDocs, loadingRandomDocs, errorRandomDocs } = useContext(RandomDocumentsContext);
     const { sampleDoc, loadingSampleDoc, errorSampleDoc } = useContext(SampleDocumentContext);
     // console.log("randomDocs:", randomDocs);
@@ -35,6 +39,7 @@ const Home = forwardRef(({ refs }) => {
 
     return (
         <>  
+            {/* render data using RandomDocumentsContext */}
             <Container>
             <div ref={refs[0]} className='text-center mt-5'>
                 <h1>{TEXTS.TRANSCRIPTION_LIST.heading}</h1>
@@ -59,6 +64,7 @@ const Home = forwardRef(({ refs }) => {
             </div>
             </Container>
 
+            {/* render data using SampleDocumentContext */}
             <div className='transcription' id="transcription" style={{ backgroundColor: '#212529' }} >
             <Container className="bg-dark mt-5 pt-5 pb-5 container">
                 <h1 ref={refs[1]} className="text-center text-white">{TEXTS.TRANSCRIPTION.heading}</h1>

@@ -1,4 +1,4 @@
- // SET SPRING PROXY PORT 8080 FOR REACT PORT 3000
+ // [localhost only] SET SPRING PROXY PORT 8080 FOR REACT PORT 3000
  
  const { createProxyMiddleware } = require('http-proxy-middleware');
 

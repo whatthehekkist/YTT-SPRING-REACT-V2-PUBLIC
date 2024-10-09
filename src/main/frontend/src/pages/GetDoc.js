@@ -9,22 +9,28 @@ import {
 import LoadingSpinner from '../components/Spinner';
 import ScrollToTranscription from '../components/ScrollToTranscription';
 import TEXTS from '../local-data/Texts';
-import { RandomDocumentsContext } from '../context/RandomDocContext';
 import YouTubeEmbed from '../components/VideoEmbed';
+
+// context having data (random documents)
+import { RandomDocumentsContext } from '../context/RandomDocContext';
+
 
 
 const GetDoc = forwardRef(({ refs }) => {
     
+    // reference RandomDocumentsContext
     const { randomDocs, loadingRandomDocs, errorRandomDocs } = useContext(RandomDocumentsContext);
 
+    // extract value of query param
     const history = useNavigate();
     const propsParam = useParams();
     const id = propsParam.id;
     console.log("at GetDoc.js: ", id);
 
+    // init doc and fetch data from the endpoint /doc?id=id in Spring
     const [doc, setDocument] = useState([]);
-    const [loading, setLoading] = useState(true); // 로딩 상태
-    const [error, setError] = useState(null); // 에러 상태
+    const [loading, setLoading] = useState(true); // true initially
+    const [error, setError] = useState(null); // null initially
 
     useEffect(() => {
 
@@ -55,7 +61,7 @@ const GetDoc = forwardRef(({ refs }) => {
     }, [id]);
 
     /***
-     // [ALT] ScrollToTranscription 
+    // [ALT] ScrollToTranscription 
     useEffect(() => {
         const element = document.getElementById("transcription");
         if (element) {
@@ -90,6 +96,7 @@ const GetDoc = forwardRef(({ refs }) => {
         <>
             <ScrollToTranscription/>
 
+            {/* render data using RandomDocumentsContext */}
             <div ref={refs[0]} className='text-center mt-5'>
                 <h1 id='transcription_list'>{TEXTS.TRANSCRIPTION_LIST.heading}</h1>
                 <p>
@@ -113,6 +120,7 @@ const GetDoc = forwardRef(({ refs }) => {
                 )}
             </div>
 
+            {/* a specific doc response on user request   */}
             <div className='transcription' id="transcription" /*ref={transcriptionRef}*/ style={{ backgroundColor: '#212529' }} >
             <Container className="bg-dark mt-5 pt-5 pb-5 container">
                 
