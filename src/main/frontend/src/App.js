@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef} from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import ScrollToTop from "./components/ScrollToTop";
@@ -20,25 +20,6 @@ function App() {
             sections[index].current.scrollIntoView({ behavior: 'smooth' });
         }
 	 };
-
-	 // for background img attach on bottom of page
-	 const [ShowBgAttachBottom, setShowBgAttachBottom] = useState(false);
-	 const handleScroll = () => {
-		 const scrollPosition = window.scrollY;
-		
-		 if (scrollPosition > window.innerHeight) {
-			setShowBgAttachBottom(true);
-		 } else {
-			setShowBgAttachBottom(false);
-		 }
-	 };
- 
-	 useEffect(() => {
-		 window.addEventListener('scroll', handleScroll);
-		 return () => {
-			 window.removeEventListener('scroll', handleScroll);
-		 };
-	 }, []);
 
 	// main component structure 
 	return (
@@ -72,7 +53,7 @@ function App() {
 				</SampleDocumentProvider>
 			</RandomDocumentsProvider>            
 
-			{ShowBgAttachBottom && <FixedBackgroundLink />} 
+			<FixedBackgroundLink /> 
 
 			<ScrollToTop />
 		</div>

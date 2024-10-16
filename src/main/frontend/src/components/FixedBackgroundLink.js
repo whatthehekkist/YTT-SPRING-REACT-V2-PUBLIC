@@ -49,7 +49,7 @@ const FixedBackground = () => {
         opacity: animate ? 1 : 0,
         transform: animate ? 'translateY(0)' : 'translateY(20px)',
         transition: 'opacity 0.5s ease, transform 0.5s ease',
-        backgroundColor: 'linear-gradient(135deg, #f3ec78, #af4261)', // 다채로운 색상
+        backgroundColor: 'linear-gradient(135deg, #f3ec78, #af4261)', 
         padding: '20px',
         borderRadius: '12px',
         boxShadow: '0 8px 20px rgba(0, 0, 0, 0.3)',

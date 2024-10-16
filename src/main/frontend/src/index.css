@@ -118,7 +118,7 @@ code {
 
 
 /*****************************************/
-/* background image attachment for transcription list and transcription */
+/* background image attachment for transcription list */
 /* https://www.youtube.com/watch?v=LSRNmhLS76o */
 /* https://cdn.pixabay.com/photo/2017/01/18/08/25/social-media-1989152_1280.jpg */
 .bg-attach-transcription-list {
@@ -208,7 +208,6 @@ code {
   margin: 100px;
 }
 
-
 .nav-bg-video-attach a::after {
   content: ""; 
   position: absolute; 
@@ -220,7 +219,6 @@ code {
   transform: scaleX(0); 
   transition: transform 0.3s ease; 
 }
-
 
 .nav-bg-video-attach a:hover::after {
   transform: scaleX(1); 
