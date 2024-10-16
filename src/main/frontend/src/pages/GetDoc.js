@@ -4,12 +4,15 @@ import axios from 'axios';
 import {
     Container,
     Accordion,
-    Button,
+    // Button,
+    Card, CardGroup,
+    Row, Col
 } from 'react-bootstrap';
 import LoadingSpinner from '../components/Spinner';
 import ScrollToTranscription from '../components/ScrollToTranscription';
 import TEXTS from '../local-data/Texts';
-import YouTubeEmbed from '../components/VideoEmbed';
+import ImageEmbed from '../components/ImageEmbed';
+// import YouTubeEmbed from '../components/VideoEmbed';
 
 // context having data (random documents)
 import { RandomDocumentsContext } from '../context/RandomDocContext';
@@ -60,28 +63,10 @@ const GetDoc = forwardRef(({ refs }) => {
 
     }, [id]);
 
-    /***
-    // [ALT] ScrollToTranscription 
-    useEffect(() => {
-        const element = document.getElementById("transcription");
-        if (element) {
-            const location = element.offsetTop;
-            window.scrollTo({ top: location, behavior: 'smooth' });
-        }
-    }, [history]);
-    ***/
-
     // function to send a GET request of a doc 
     const fetchDocHandler = (id) => {
         
         (id) ? history(`/doc/${id}`) : alert("something went wrong..try again.");   
-
-        /***
-        // [ALT] ScrollToTranscription 
-        let location = document.querySelector("#transcription").offsetTop;
-        window.scrollTo({top:location, behavior:'smooth'});
-        ***/
-
     };
 
     if (loadingRandomDocs || loading) return (<div><LoadingSpinner /></div>);
@@ -97,52 +82,69 @@ const GetDoc = forwardRef(({ refs }) => {
             <ScrollToTranscription/>
 
             {/* render data using RandomDocumentsContext */}
-            <div ref={refs[0]} className='text-center mt-5'>
-                <h1 id='transcription_list'>{TEXTS.TRANSCRIPTION_LIST.heading}</h1>
-                <p>
-                    {TEXTS.TRANSCRIPTION_LIST.desc1}<br/>
-                    {randomDocs ? (randomDocs.length) : ('Multiple')} {TEXTS.TRANSCRIPTION_LIST.desc2}
-                </p>
+            <div className='bg-attach-transcription-list'>
+                <Container>
+                    <div ref={refs[0]} className='text-center'>
+                        <h1 className='pt-5 pb-4'>{TEXTS.TRANSCRIPTION_LIST.heading}</h1>
+                        <p>
+                            {TEXTS.TRANSCRIPTION_LIST.desc1}<br/>
+                            {randomDocs ? (randomDocs.length) : ('Multiple')} {TEXTS.TRANSCRIPTION_LIST.desc2}
+                        </p>
 
-                {randomDocs && randomDocs.length > 0 ? (
-                    randomDocs.map((doc, index) => (
-                        <div key={index}>
-                            <Button variant="light" 
-                                    className='m-1'
-                                    onClick={ () => fetchDocHandler(doc.id)} 
-                            >
-                                {doc.title}
-                            </Button>
+                        <div className='container mt-5 pb-5'>
+                            <Row className='justify-content-center g-4'>
+                                {randomDocs && randomDocs.length > 0 ? (
+                                            randomDocs.map((doc, index) => (
+                                    
+                                    <Col xs={12} sm={6} md={4} key={index} className="d-flex justify-content-center mx-5 mb-4"> {/* xs: 1열, sm: 2열, md: 3열 */}
+                                        <CardGroup>
+                                                            
+                                            <Card style={{ width: '18rem',  cursor: 'pointer' }} 
+                                                    onClick={ () => fetchDocHandler(doc.id) } 
+                                                    className='transcription-list-card'
+                                            >
+                                                <Card.Img variant="top" src={`https://img.youtube.com/vi/${doc.videoId}/hqdefault.jpg`} />
+                                                    <Card.Body>
+                                                        <Card.Text>{doc.title}</Card.Text>
+                                                    </Card.Body>
+                                                </Card>
+                                                        
+                                        </CardGroup>
+                                    </Col>
+                                ))) : (
+                                    <p>No random documents found.</p>
+                                )}
+                                
+                            </Row>
                         </div>
-                    ))
-                ) : (
-                    <p>No random documents found.</p>
-                )}
+                    </div>
+                </Container>
             </div>
 
             {/* a specific doc response on user request   */}
-            <div className='transcription' id="transcription" /*ref={transcriptionRef}*/ style={{ backgroundColor: '#212529' }} >
-            <Container className="bg-dark mt-5 pt-5 pb-5 container">
-                
-                <h1 ref={refs[1]} className="text-center text-white">{TEXTS.TRANSCRIPTION.heading}</h1>
-                <Container className="mt-5 mb-5">
-                    <YouTubeEmbed videoId={doc.videoId} title={doc.title} /> 
+            <div className='bg-transcription transcription' id="transcription">
+                <Container className="pb-5 container">
+                    
+                    <h1 ref={refs[1]} className="pt-5 pb-4 text-center text-white">{TEXTS.TRANSCRIPTION.heading}</h1>
+                    <Container className="mt-5 mb-5">
+                        {/* <YouTubeEmbed videoId={doc.videoId} title={doc.title} />  */}
+                        <ImageEmbed videoId={doc.videoId} title={doc.title} /> 
+                    </Container>
+
+                    <h3 className='text-white text-center mb-3'>{doc && doc.title}</h3>
+                    {doc && doc.captionTracks.map((captionTrack, captionTracksIndex) => (
+
+                        <Accordion defaultActiveKey="0" key={captionTracksIndex}>
+                            <Accordion.Item className='mt-2'>
+                                <Accordion.Header>{captionTrack.name}</Accordion.Header>
+                                <Accordion.Body>
+                                    {captionTrack.script}
+                                </Accordion.Body>
+                            </Accordion.Item>
+                        </Accordion>
+
+                    ))}
                 </Container>
-
-                <h3 className='text-white text-center mb-3'>{doc && doc.title}</h3>
-                {doc && doc.captionTracks.map((captionTrack, captionTracksIndex) => (
-
-                    <Accordion defaultActiveKey="0" key={captionTracksIndex}>
-                        <Accordion.Item className='mt-2'>
-                            <Accordion.Header>{captionTrack.name}</Accordion.Header>
-                            <Accordion.Body>
-                                {captionTrack.script}
-                            </Accordion.Body>
-                        </Accordion.Item>
-                    </Accordion>
-
-                ))}
-            </Container>
             </div>
         </>
 

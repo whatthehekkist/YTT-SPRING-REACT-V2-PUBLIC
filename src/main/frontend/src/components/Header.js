@@ -1,52 +1,66 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
-import {
-  Button,
-  Badge,
-} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
+  
 function Header({ scrollToSection }) {
 
-  // for text content resolution at line 42
   const location = useLocation();
-  useEffect(() => {
+  const [isMobile, setIsMobile] = useState(false);
 
+  // for text content resolution at line 52
+  useEffect(() => {
     (!location.search) ? 
       console.log(location.pathname) : console.log(`${location.pathname}${location.search}`);
 
-  }, [ location ])
+  }, [ location ]);
 
+   // isMobile setter
+  useEffect(() => {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    if (/Mobi|android|ip(hone|od|ad)|windows phone/i.test(userAgent)) {
+        setIsMobile(true);
+    }
+  }, []);
 
   return (
     <>
-    <div id='myNav' style={{ height: '50vh', backgroundColor: '#212529' }}>
+    <div /*id='myNav'*/ className="nav-bg-video-attach" style={{ height: '100vh' , backgroundColor: '#212529' }}>
+      
+      <div className='overlay'></div>
 
-      <div className='pt-5 mt-5'></div>
-      <Link className="navbar-brand">
-        <Badge bg="dark" 
-               variant="secondary" 
-               as={Button} 
-               onClick={ () => scrollToSection(0) } // init scrollToSection value 
-        > 
-            Transcription List
-        </Badge>
-      </Link>
+      {/* if mobile, go for image instead of bg video */}
+      {!isMobile ? (
+          <video preload="metadata" autoPlay loop muted>
+              <source src="/videos/kovaleva.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+          </video>
+      ) : (
+          <img src="/images/kovaleva-static.png" 
+                alt="Background" 
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+          />
+      )}
 
-      <Link className="navbar-brand">
-        <Badge bg="dark" 
-               variant="secondary" 
-               as={Button} 
-               onClick={ () => scrollToSection(1) } // init scrollToSection value 
-        > 
-          {location.pathname === '/' ? ('Sample Transcription') : ('Transcription')}
-        </Badge>
-      </Link>
-      <div className='pt-5 mt-5'></div>
+      {/* navs */}
+      <div className='content'>
+        <Link>
+          <h2 onClick={ () => scrollToSection(0) }>
+              Transcription List
+          </h2>
+        </Link>
+        <Link>
+          <h2 onClick={ () => scrollToSection(1) }>
+            {location.pathname === '/' ? ('Sample Transcription') : ('Transcription')}
+          </h2>
+        </Link>
+        
+      </div>
+      
+      
       
     </div>
     </>
-  
+    
   );
 
 };

@@ -1,5 +1,6 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 
+/*****************************************/
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -15,24 +16,12 @@ code {
     monospace;
 }
 
-#myNav {
-  display: flex;
-  flex-direction: column;
-  /* flex-wrap: wrap; */
-  justify-content:space-around; 
-  padding: 1rem; /* 패딩 추가 */
-  /* font-size: xx-large; */
-}
-
-#myNav a {
-  font-size: 6.0vw;
-  margin: auto auto;
-}
-
 .transcription {
   background-color: '#212529';
 }
 
+
+/*****************************************/
 /*loading spinner*/
 /* https://stackoverflow.com/questions/74991443/how-can-i-make-loader-cover-the-all-page */
 .loader-wrapper {
@@ -84,15 +73,6 @@ code {
 }
 
 
-/* .loader-wrapper:after{
-  content: "Loading text";
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%)
-} */
-
 #loader-text {
   font-family: sans-serif;
   text-align: center;
@@ -114,3 +94,170 @@ code {
   align-items: center;
   justify-content: center;
 }
+
+
+/*****************************************/
+/* for transcription card on hover */
+.transcription-list-card {
+  transition: transform 0.2s, box-shadow 0.2s; 
+}
+
+.transcription-list-card:hover {
+  /* transform: scale(1.05);  */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0% { transform: translate(0); }
+  25% { transform: translate(-5px); }
+  50% { transform: translate(5px); }
+  75% { transform: translate(-5px); }
+  100% { transform: translate(0); }
+}
+
+
+/*****************************************/
+/* background image attachment for transcription list and transcription */
+/* https://www.youtube.com/watch?v=LSRNmhLS76o */
+/* https://cdn.pixabay.com/photo/2017/01/18/08/25/social-media-1989152_1280.jpg */
+.bg-attach-transcription-list {
+  background-image: linear-gradient( rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8) )
+                    ,url("/public/images/bg-image.jpg");  
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; 
+  background-attachment: fixed; 
+}
+/* not in use */
+.bg-alt-transcription-list {
+  /* background-image: linear-gradient( rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8) );   */
+  height: auto;
+  background-image: linear-gradient( rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8) )
+  ,url("/public/images/bg-image.jpg");  
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center; 
+  /* background-attachment: relative;  */
+}
+/* not in use */
+.bg-attach-transcription {
+  height: auto;
+  background-image: linear-gradient( rgba(10, 0, 0, 0.7), rgba(0, 0, 0, 0.9) )
+                    ,url("/public/images/pexels-joaojesusdesign-925743.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; 
+  background-attachment: fixed; 
+  padding-bottom: 50px;
+               
+}
+
+/*****************************************/
+/* background color for transcription */
+
+/* https://www.eggradients.com/gradient/ */
+/* https://uigradients.com/ */
+.bg-transcription {
+  height: auto;
+  background-color: #000000;
+  background-image: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 50%, #7f8c8d 100%);
+  /* background-image: linear-gradient(315deg, #000000 0%, #7f8c8d 74%);  */
+  
+  /* background-color: #2b4162;
+  background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%); */
+
+  /* background-color: #4d4855;
+  background-image: linear-gradient(147deg, #4d4855 0%, #000000 74%); */
+}
+
+
+/*****************************************/
+/* background video for nav */
+.nav-bg-video-attach {
+  position: relative; 
+  width: 100%;
+  height: 50vh; 
+  overflow: hidden; 
+}
+
+.nav-bg-video-attach video {
+  width: 100%; /* 너비 자동 조정 */
+  height: 100%; /* 높이 자동 조정 */
+  object-fit: cover;
+  /* position: absolute; */
+}
+
+.nav-bg-video-attach .content {
+  position: absolute; 
+  color: white; 
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center; 
+}
+
+.nav-bg-video-attach a {
+  position: relative; 
+  text-decoration: none; 
+  color: #f3ebeb; 
+  margin: 100px;
+}
+
+
+.nav-bg-video-attach a::after {
+  content: ""; 
+  position: absolute; 
+  left: 0; 
+  bottom: -2px; 
+  width: 100%; 
+  height: 2px; 
+  background-color: #f8b6b6; 
+  transform: scaleX(0); 
+  transition: transform 0.3s ease; 
+}
+
+
+.nav-bg-video-attach a:hover::after {
+  transform: scaleX(1); 
+}
+
+.nav-bg-video-attach .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; 
+  height: 100%; 
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+/* not in use */
+/* #myNav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 1rem; 
+}
+
+#myNav a {
+  font-size: 2.3em;
+  margin: auto auto;
+}
+
+@media (max-width: 768px) {
+  #myNav {
+    flex-direction: column;
+    align-items: center; 
+  }
+
+  #myNav a {
+    margin: 5.5rem 0;
+  }
+} */
+

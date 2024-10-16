@@ -39,12 +39,19 @@ const ScrollToTop = () => {
                 border: 'none',
                 borderRadius: '5px',
                 opacity: '0.8',
-                // padding: '5px',
+                padding: '5px',
                 cursor: 'pointer',
-                display: visible ? 'block' : 'none', 
+                display: visible ? 'block' : 'none', // 버튼 표시 여부 결정
             }}
         >
-            <span style={{fontSize: '30px'}}>&uarr;</span>
+            {/* <span style={{fontSize: '30px'}}>&uarr;</span> */}
+            {/* <span style={{fontSize: '30px', fontWeight: 'bold'}}>^</span> */}
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-caret-up" viewBox="0 0 16 16">
+                    <path d="M3.204 11h9.592L8 5.519zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659"/>
+                </svg>
+            </span>
+
         </button>
     );
 };

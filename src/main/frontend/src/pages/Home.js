@@ -5,9 +5,11 @@ import TEXTS from '../local-data/Texts';
 import {
     Container,
     Accordion,
-    Button,
+    // Button,
+    Card, CardGroup,
+    Row, Col
 } from 'react-bootstrap';
-import YouTubeEmbed from '../components/VideoEmbed';
+import ImageEmbed from '../components/ImageEmbed';
 
 // contexts having each of data (random documents and sample document respectively)
 import { RandomDocumentsContext } from '../context/RandomDocContext';
@@ -40,51 +42,66 @@ const Home = forwardRef(({ refs }) => {
     return (
         <>  
             {/* render data using RandomDocumentsContext */}
-            <Container>
-            <div ref={refs[0]} className='text-center mt-5'>
-                <h1>{TEXTS.TRANSCRIPTION_LIST.heading}</h1>
-                <p>
-                    {TEXTS.TRANSCRIPTION_LIST.desc1}<br/>
-                    {randomDocs ? (randomDocs.length) : ('Multiple')} {TEXTS.TRANSCRIPTION_LIST.desc2}
-                </p>
-                {randomDocs && randomDocs.length > 0 ? (
-                    randomDocs.map((doc, index) => (
-                        <div key={index}>
-                            <Button variant="light" 
-                                    className='m-1'
-                                    onClick={ () => fetchDocHandler(doc.id) } 
-                            >
-                                {doc.title}
-                            </Button>
-                        </div>
-                    ))
-                ) : (
-                    <p>No random documents found.</p>
-                )}
-            </div>
-            </Container>
-
-            {/* render data using SampleDocumentContext */}
-            <div className='transcription' id="transcription" style={{ backgroundColor: '#212529' }} >
-            <Container className="bg-dark mt-5 pt-5 pb-5 container">
-                <h1 ref={refs[1]} className="text-center text-white">{TEXTS.TRANSCRIPTION.heading}</h1>
-                <Container className="mt-5 mb-5">
-                    <YouTubeEmbed videoId={sampleDoc.videoId} title={sampleDoc.title} /> 
-                </Container>
-                
-                <h3 className='text-white text-center mb-3'>{sampleDoc && sampleDoc.title}</h3>
-                {sampleDoc && sampleDoc.captionTracks.map((captionTrack, captionTracksIndex) => (
+            <div className='bg-attach-transcription-list'>
+                <Container>
+                <div ref={refs[0]} className='text-center'>
+                    <h1 className='pt-5 pb-4'>{TEXTS.TRANSCRIPTION_LIST.heading}</h1>
+                    <p>
+                        {TEXTS.TRANSCRIPTION_LIST.desc1}<br/>
+                        {randomDocs ? (randomDocs.length) : ('Multiple')} {TEXTS.TRANSCRIPTION_LIST.desc2}
+                    </p>
                     
-                    <Accordion defaultActiveKey="0" key={captionTracksIndex}>
-                        <Accordion.Item className='mt-2'>
-                        <Accordion.Header>{captionTrack.name}</Accordion.Header>
-                        <Accordion.Body>
-                            {captionTrack.script}
-                        </Accordion.Body>
-                        </Accordion.Item>
-                    </Accordion>
-                ))}
-            </Container>
+                    <div className='container mt-5 pb-5'>
+                        <Row className='justify-content-center g-4'>
+                            {randomDocs && randomDocs.length > 0 ? (
+                                        randomDocs.map((doc, index) => (
+                                
+                                <Col xs={12} sm={6} md={4} key={index} className="d-flex justify-content-center mx-5 mb-4"> {/* xs: 1열, sm: 2열, md: 3열 */}
+                                    <CardGroup>
+                                                        
+                                        <Card style={{ width: '18rem',  cursor: 'pointer' }} 
+                                                onClick={ () => fetchDocHandler(doc.id) } 
+                                                className='transcription-list-card'
+                                        >
+                                            <Card.Img variant="top" src={`https://img.youtube.com/vi/${doc.videoId}/hqdefault.jpg`} />
+                                                <Card.Body>
+                                                    <Card.Text>{doc.title}</Card.Text>
+                                                </Card.Body>
+                                            </Card>
+                                                    
+                                    </CardGroup>
+                                </Col>
+                            ))) : (
+                                <p>No random documents found.</p>
+                            )}
+                            
+                        </Row>
+                    </div>
+
+                </div>
+                </Container>
+            </div>
+
+            {/* render data using SampleDocumentContext */}                
+            <div className='/*bg-attach-transcription*/ bg-transcription transcription' id="transcription">
+                <Container className="pb-5 container">
+                    <h1 ref={refs[1]} className="pt-5 pb-4 text-center text-white">{TEXTS.TRANSCRIPTION.heading}</h1>
+                    <Container className="mt-5 mb-5">
+                        {/* <YouTubeEmbed videoId={sampleDoc.videoId} title={sampleDoc.title} />  */}
+                        <ImageEmbed videoId={sampleDoc.videoId} title={sampleDoc.title} /> 
+                    </Container>
+                    
+                    <h3 className='text-white text-center mb-3'>{sampleDoc && sampleDoc.title}</h3>
+                    {sampleDoc && sampleDoc.captionTracks.map((captionTrack, captionTracksIndex) => (
+                        
+                        <Accordion defaultActiveKey="0" key={captionTracksIndex}>
+                            <Accordion.Item className='mt-2'>
+                                <Accordion.Header>{captionTrack.name}</Accordion.Header>
+                                <Accordion.Body>{captionTrack.script}</Accordion.Body>
+                            </Accordion.Item>
+                        </Accordion>
+                    ))}
+                </Container>
             </div>
 
         </>
