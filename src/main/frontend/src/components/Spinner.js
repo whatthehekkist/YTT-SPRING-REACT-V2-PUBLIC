@@ -1,4 +1,39 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+const LoadingSpinner = ({ isLoading }) => {
+  useEffect(() => {
+    // disable scroll while loading
+    if (isLoading) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto'; // restore scroll on component unmount
+    };
+  }, [isLoading]);
+
+  return (
+    <div className="loader-wrapper">
+      <span className="loader"><span className="loader-inner"></span></span>
+      <div className="row text-center mt-2" style={{ color: "rgb(114, 119, 119)", fontSize: 20 }}>
+        loading...
+      </div>
+    </div>
+  );
+};
+
+export default LoadingSpinner;
+
+
+
+
+
+
+/***
+// ALT 
+ import React from 'react';
 
 const LoadingSpinner = () => {
   return (
@@ -11,10 +46,10 @@ const LoadingSpinner = () => {
   );
 };
 export default LoadingSpinner;
-
+***/
 
 /***
-// ALT 1
+// ALT 
 import React from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 
@@ -32,7 +67,7 @@ export default LoadingSpinner;
 ***/
 
 /***
-// ALT 2
+// ALT 
 import React from 'react';
 import Spinner from '../img/spinner.gif';
 

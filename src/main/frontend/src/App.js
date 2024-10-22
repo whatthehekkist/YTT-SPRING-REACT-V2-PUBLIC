@@ -1,4 +1,4 @@
-import React, { useRef} from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import ScrollToTop from "./components/ScrollToTop";
@@ -7,19 +7,35 @@ import Home from './pages/Home';
 import GetDoc from './pages/GetDoc';
 import RandomDocumentsProvider from './context/RandomDocContext';
 import SampleDocumentProvider from './context/SampleDocContext';
-
 import FixedBackgroundLink from './components/FixedBackgroundLink';
-
 
 function App() {
 
-	// for in-page nav scroll on click
+	// for scrollToSection in nav
 	 const sections = [useRef(null), useRef(null), useRef(null)];
 	 const scrollToSection = (index) => {
 		if(sections[index].current) {
             sections[index].current.scrollIntoView({ behavior: 'smooth' });
         }
 	 };
+
+	const [ShowBgAttachBottom, setShowBgAttachBottom] = useState(false);
+	const handleScroll = () => {
+		const scrollPosition = window.scrollY;
+	
+		if (scrollPosition > window.innerHeight) {
+		setShowBgAttachBottom(true);
+		} else {
+		setShowBgAttachBottom(false);
+		}
+	};
+
+	useEffect(() => {
+		window.addEventListener('scroll', handleScroll);
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+		};
+	}, []);
 
 	// main component structure 
 	return (
@@ -53,7 +69,7 @@ function App() {
 				</SampleDocumentProvider>
 			</RandomDocumentsProvider>            
 
-			<FixedBackgroundLink /> 
+			{ShowBgAttachBottom && <FixedBackgroundLink />} 
 
 			<ScrollToTop />
 		</div>

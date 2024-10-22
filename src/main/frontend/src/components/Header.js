@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
 import { Link } from 'react-router-dom';
-  
+
 function Header({ scrollToSection }) {
 
   const location = useLocation();
   const [isMobile, setIsMobile] = useState(false);
 
-  // for text content resolution at line 52
+  // for text content resolution at line 53
   useEffect(() => {
     (!location.search) ? 
       console.log(location.pathname) : console.log(`${location.pathname}${location.search}`);
 
   }, [ location ]);
 
-   // isMobile setter
+  // isMobile setter
   useEffect(() => {
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
     if (/Mobi|android|ip(hone|od|ad)|windows phone/i.test(userAgent)) {
