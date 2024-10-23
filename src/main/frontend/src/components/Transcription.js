@@ -28,7 +28,7 @@ const Transcription = ( { refs, doc }) => {
 
 
 
-    /* handle Accordian toggles (collapse state) between the buttons "Word Cloud" and "Script" in Accordian */
+    /* handle Accordion toggles (collapse state) between the buttons "Word Cloud" and "Script" in Accordion */
     /* say "Word Cloud" clicked, force "Script" content to be collapsed if being shown, otherwise just show the content. (vise-versa) */
 
     // function toggleWordCloud on clicking the button "Word Cloud" in Accordion.Body
