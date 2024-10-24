@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
 import { Link } from 'react-router-dom';
+import VideoBackGround from './VideoBackGround';
 
 function Header({ scrollToSection }) {
 
@@ -28,17 +29,12 @@ function Header({ scrollToSection }) {
       
       <div className='overlay'></div>
 
-      {/* if mobile, go for image instead of bg video */}
-      {!isMobile ? (
-          <video preload="metadata" autoPlay loop muted>
-              <source src="/videos/kovaleva.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-          </video>
-      ) : (
-          <img src="/images/kovaleva-static.png" 
-                alt="Background" 
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-          />
+       {/* if mobile, go for image instead of bg video */}
+       {!isMobile ? ( <VideoBackGround /> ) : (
+        <img src="/images/kovaleva-static.png"
+          alt="Background"
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        />
       )}
 
       {/* navs */}

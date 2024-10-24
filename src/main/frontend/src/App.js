@@ -12,21 +12,21 @@ import FixedBackgroundLink from './components/FixedBackgroundLink';
 function App() {
 
 	// for scrollToSection in nav
-	 const sections = [useRef(null), useRef(null), useRef(null)];
-	 const scrollToSection = (index) => {
-		if(sections[index].current) {
-            sections[index].current.scrollIntoView({ behavior: 'smooth' });
-        }
-	 };
+	const sections = [useRef(null), useRef(null), useRef(null)];
+	const scrollToSection = (index) => {
+		if (sections[index].current) {
+			sections[index].current.scrollIntoView({ behavior: 'smooth' });
+		}
+	};
 
 	const [ShowBgAttachBottom, setShowBgAttachBottom] = useState(false);
 	const handleScroll = () => {
 		const scrollPosition = window.scrollY;
-	
+
 		if (scrollPosition > window.innerHeight) {
-		setShowBgAttachBottom(true);
+			setShowBgAttachBottom(true);
 		} else {
-		setShowBgAttachBottom(false);
+			setShowBgAttachBottom(false);
 		}
 	};
 
@@ -41,35 +41,35 @@ function App() {
 	return (
 		<div>
 			<StickyHome />
-			<Header scrollToSection={scrollToSection} />			
+			<Header scrollToSection={scrollToSection} />
 
 			<RandomDocumentsProvider>
 				<SampleDocumentProvider>
 					<Routes>
 
-						<Route 	
-							exact path="/" 
+						<Route
+							exact path="/"
 							element={
-								<Home refs={sections} 
-										titles={["Home", "Transcription List", "Sample Transcription"]} 
+								<Home refs={sections}
+									titles={["Home", "Transcription List", "Sample Transcription"]}
 								/>
-							} 
+							}
 						/>
-						
-						<Route 	
+
+						<Route
 							path="/doc/:id"
 							element={
-								<GetDoc refs={sections} 
-										titles={["Home", "Transcription List", "Transcription"]} 
+								<GetDoc refs={sections}
+									titles={["Home", "Transcription List", "Transcription"]}
 								/>
-							} 
-						/>						
-					
+							}
+						/>
+
 					</Routes>
 				</SampleDocumentProvider>
-			</RandomDocumentsProvider>            
+			</RandomDocumentsProvider>
 
-			{ShowBgAttachBottom && <FixedBackgroundLink />} 
+			{ShowBgAttachBottom && <FixedBackgroundLink />}
 
 			<ScrollToTop />
 		</div>

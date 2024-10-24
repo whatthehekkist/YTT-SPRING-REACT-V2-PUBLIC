@@ -50,7 +50,7 @@ const TranscriptionList = ({ refs, randomDocs }) => {
 											</Card>
 										</CardGroup>
 									</Col>
-									
+
 								))) : (
 								<p>No random documents found.</p>
 							)}

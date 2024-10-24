@@ -5,36 +5,36 @@ import axios from 'axios';
 export const SampleDocumentContext = createContext();
 
 const SampleDocumentProvider = ({ children }) => {
-    const [sampleDoc, setDocuments] = useState([]);
-    const [loadingSampleDoc, setLoading] = useState(true);
-    const [errorSampleDoc, setError] = useState(null);
+	const [sampleDoc, setDocuments] = useState([]);
+	const [loadingSampleDoc, setLoading] = useState(true);
+	const [errorSampleDoc, setError] = useState(null);
 
-    useEffect(() => {
-        const fetchDocuments = async () => {
-            try {
-                const response = await axios.get('/sampledoc');
-                // console.log("Documents Response:", response.data);
-                setDocuments(response.data);
-            } catch (error) {
-                console.error("Error fetching documents:", error);
-                setError(error);
-            } finally {
-                setLoading(false);
-            }
-        };
+	useEffect(() => {
+		const fetchDocuments = async () => {
+			try {
+				const response = await axios.get('/sampledoc');
+				// console.log("Documents Response:", response.data);
+				setDocuments(response.data);
+			} catch (error) {
+				console.error("Error fetching documents:", error);
+				setError(error);
+			} finally {
+				setLoading(false);
+			}
+		};
 
-        fetchDocuments();
+		fetchDocuments();
 
-    }, []);
+	}, []);
 
-    return (
-        <>
-        {/* <pre>{JSON.stringify(sampleDoc, null, 2)}</pre>          */}
-        <SampleDocumentContext.Provider value={{ sampleDoc, loadingSampleDoc, errorSampleDoc }}>
-            {children}
-        </SampleDocumentContext.Provider>
-        </>
-    );
+	return (
+		<>
+			{/* <pre>{JSON.stringify(sampleDoc, null, 2)}</pre>          */}
+			<SampleDocumentContext.Provider value={{ sampleDoc, loadingSampleDoc, errorSampleDoc }}>
+				{children}
+			</SampleDocumentContext.Provider>
+		</>
+	);
 };
 
 
