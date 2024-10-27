@@ -17,9 +17,11 @@ YTT (Youtube To Text) is a web project that provides a full caption of Youtube v
 - git, IntelliJ community
 
 # how to run the app in localhost
-`git clone https://github.com/whatthehekkist/YTT-SPRING-REACT-V2-PUBLIC.git`
+```js
+git clone https://github.com/whatthehekkist/YTT-SPRING-REACT-V2-PUBLIC.git
+```
 
-npm installation at *src/main/frontend*
+npm installation at `src/main/frontend`
 ```js
 npm install npx -g
 npx create-react-app frontend
@@ -28,11 +30,11 @@ npm install axios http-proxy-middleware react-bootstrap bootstrap react-router-d
 
 ## Spring React integrated build
 op1) build and run Spring & React (integrated build)
-- Spring: `./gradlew clean build` -> `java -jar ./build/libs/ytt-0.0.1-SNAPSHOT.jar` -> *http://localhost:8080*
+- Spring at `/`: `./gradlew clean build` -> `java -jar ./build/libs/ytt-0.0.1-SNAPSHOT.jar` -> *http://localhost:8080*
 
 ## op2) build and run Spring and then React at runtime
-- Spring: `./gradlew clean bootrun` -> *http://localhost:8080*
-- React: `npm start` at *./src/main/frontend/* -> *http://localhost:3000*
+- Spring at `/`: `./gradlew clean bootrun` -> *http://localhost:8080*
+- React at `src/main/frontend`: `npm start` at *./src/main/frontend/* -> *http://localhost:3000*
 
 # Refs
 - https://hojun-dev.tistory.com/entry/Spring-Boot-%EB%AC%B4%EB%A3%8C%EB%A1%9C-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0-Koyeb-GitHub
