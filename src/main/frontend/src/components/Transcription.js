@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Accordion, Container, Button } from 'react-bootstrap';
-import LoadingSpinner from '../components/Spinner';
+import LoadingSpinner from './Spinner';
 import TEXTS from '../local-data/Texts';
 import ImageEmbed from './ImageEmbed';
 import WordCloud from './WordCloud';
+import PDFGenerator from './PDFGenerator';
 
 /**
  * @param refs props for scroll event
@@ -17,7 +18,7 @@ const Transcription = ({ refs, doc }) => {
 	const [openScript, setOpenScript] = useState(Array(doc.captionTracks.length).fill(false));
 	const [renderedWordCloud, setRenderedWordCloud] = useState(Array(doc.captionTracks.length).fill(null));
 	const [renderedScript, setRenderedScript] = useState(Array(doc.captionTracks.length).fill(null));
-
+	
 	// keep initializing the states on change of doc
 	useEffect(() => {
 		setOpenWordCloud(Array(doc.captionTracks.length).fill(false));
@@ -85,7 +86,6 @@ const Transcription = ({ refs, doc }) => {
 		}
 	};
 
-
 	return (
 		<div className='bg-transcription transcription' id="transcription">
 			<Container className="pb-5 container">
@@ -106,8 +106,9 @@ const Transcription = ({ refs, doc }) => {
 									{/* check if current script (doc.captionTracks[captionTracksIndex]) is ok to be rendered as word cloud or text */}
 									{/* refer to the function toggleWordCloud */}
 									<Button
-										variant={openWordCloud[captionTracksIndex] ? "success" : "light"}
-										className="mx-2"
+										className={openWordCloud[captionTracksIndex] ? "button-in-accordion-body mx-2 fw-bold" : "button-in-accordion-body mx-2"}
+										onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#abc5ed'} 
+										onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#d9e8ff'} 
 										onClick={() => toggleWordCloud(captionTracksIndex)}
 									>
 										Word Cloud
@@ -115,14 +116,16 @@ const Transcription = ({ refs, doc }) => {
 
 									{/* refer to the function toggleScript */}
 									<Button
-										variant={openScript[captionTracksIndex] ? "success" : "light"}
-										className="mx-2"
+										className={openScript[captionTracksIndex] ? "button-in-accordion-body mx-2 fw-bold" : "button-in-accordion-body mx-2"}
+										onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#abc5ed'} 
+										onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#d9e8ff'} 
 										onClick={() => toggleScript(captionTracksIndex)}
 									>
 										Script
 									</Button>
 								</div>
 
+								
 								{/* Within current Accordion, the button "Word Cloud" is clicked (true), 
 								and if word cloud content has already been rendered, re-use the rendered resource.
 								Otherwise, loading -> generate word cloud -> React automatically re-renders on state updates -> renderedWordCloud[captionTracksIndex] becomes not null
@@ -139,7 +142,11 @@ const Transcription = ({ refs, doc }) => {
 								{/* works nearly the same as above (and no need loading as it's plain text) */}
 								{openScript[captionTracksIndex] && renderedScript[captionTracksIndex] && (
 									<div>
-										{renderedScript[captionTracksIndex]}
+										{/* call PDFGenerator to render current script in plain text as well as generating pdf in one go */}
+										<PDFGenerator 
+											title={captionTrack.name} 
+											script={renderedScript[captionTracksIndex]} 
+										/>
 									</div>
 								)}
 							</Accordion.Body>

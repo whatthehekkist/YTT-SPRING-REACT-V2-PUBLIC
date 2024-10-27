@@ -41,7 +41,7 @@ const ScrollToTop = () => {
 				opacity: '0.8',
 				padding: '5px',
 				cursor: 'pointer',
-				display: visible ? 'block' : 'none', // 버튼 표시 여부 결정
+				display: visible ? 'block' : 'none', 
 			}}
 		>
 			{/* <span style={{fontSize: '30px'}}>&uarr;</span> */}

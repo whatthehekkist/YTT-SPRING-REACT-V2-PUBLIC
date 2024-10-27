@@ -1,5 +1,3 @@
-
-
 export const TEXTS = {
     TRANSCRIPTION_LIST: {
         heading: "Transcription List",

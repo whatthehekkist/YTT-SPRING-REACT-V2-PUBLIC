@@ -12,13 +12,19 @@ YTT (Youtube To Text) is a web project that provides a full caption of Youtube v
 # tech stack
 - Spring Boot 3.3.3, Gradle, Java 21, mongoDB atlas
   -  RestController, Lombok, JPA over data-mongodb, Logger.
-- React ^18.3.1
-  - react-router-dom, react-dom, react-bootstrap, bootstrap, http-proxy-middleware, axios
+  - React ^18.3.1
 - Deployment: koyeb (git + buildpack)
 - git, IntelliJ community
 
 # how to run the app in localhost
 `git clone https://github.com/whatthehekkist/YTT-SPRING-REACT-V2-PUBLIC.git`
+
+npm installation at *src/main/frontend*
+```js
+npm install npx -g
+npx create-react-app frontend
+npm install axios http-proxy-middleware react-bootstrap bootstrap react-router-dom d3 d3-cloud html2pdf.js@0.9.3
+```
 
 ## Spring React integrated build
 op1) build and run Spring & React (integrated build)

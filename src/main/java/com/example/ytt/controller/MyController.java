@@ -62,12 +62,15 @@ public class MyController {
         return new ResponseEntity<>(doc, HttpStatus.OK);
     }
 
-    /* just ignore favicon req from client */
+    /* ignores some default requests to Spring */
     @GetMapping("favicon.ico")
-    public void ignoreFaviconAtRoot() {}
+    public void ignoreFavicon() {}
 
     @GetMapping("/doc/favicon.ico")
-    public void ignoreFaviconAtDoc() {}
+    public void ignoreDocFavicon() {}
+
+    @GetMapping("/doc/static/css/**")
+    public void ignoreDocStaticCss() {}
 
 
     /* ************************************************** */
