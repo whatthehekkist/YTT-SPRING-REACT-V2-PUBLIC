@@ -31,10 +31,17 @@ function Header({ scrollToSection }) {
 
 				{/* if mobile, go for image instead of bg video */}
 				{!isMobile ? (<VideoBackGround />) : (
-					<img src="/images/kovaleva-static.png"
-						alt="Background"
-						style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-					/>
+					<picture>
+						<source srcSet="/images/kovaleva-static.webp" 
+								type="image/webp"
+								style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+								alt="header bg img"
+						/>  
+						<img src="/images/kovaleva-static.png" 
+							style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+							alt="header bg img" 
+						/>
+				  </picture>
 				)}
 
 				{/* navs */}

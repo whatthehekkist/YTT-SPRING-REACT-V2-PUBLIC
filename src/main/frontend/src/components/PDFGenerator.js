@@ -74,7 +74,7 @@ const PDFGenerator = ({ title, script }) => {
     useEffect(() => {
         if (isMobile) {
             // on mobile, check if the script length exceeds average # of chars in a single page
-            setHideDownloadBtnOnMobile(script.length > 2850);
+            setHideDownloadBtnOnMobile(script.length > 2800);
         } else {
             // whatever is just OK on desktop
             setHideDownloadBtnOnMobile(false);
