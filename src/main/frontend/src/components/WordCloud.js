@@ -116,7 +116,7 @@ const WordCloud = ({ text }) => {
 	}, [topWords, svgSize, draw]); // execute the hook on dependancy states change
 
 	// object for div style
-	const fixedBackgroundStyle = {
+	const backgroundStyle = {
 		height: isMobile ? '70vh' : '100vh',
 		backgroundColor: 'rgba(0, 0, 0, 0.9)',
 		display: 'flex',
@@ -127,7 +127,7 @@ const WordCloud = ({ text }) => {
 	};
 
 	return (
-		<div style={fixedBackgroundStyle}>
+		<div style={backgroundStyle}>
 			{loading && <LoadingSpinner />}
 			<svg
 				ref={svgRef}

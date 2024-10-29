@@ -8,7 +8,7 @@ function Header({ scrollToSection }) {
 	const location = useLocation();
 	const [isMobile, setIsMobile] = useState(false);
 
-	// for text content resolution at line 53
+	// for text content resolution at line 56
 	useEffect(() => {
 		(!location.search) ?
 			console.log(location.pathname) : console.log(`${location.pathname}${location.search}`);
