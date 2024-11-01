@@ -43,7 +43,8 @@ const TranscriptionList = ({ refs, randomDocs }) => {
 												onClick={() => fetchDocHandler(doc.id)}
 												className='transcription-list-card'
 											>
-												<Card.Img variant="top" src={`https://img.youtube.com/vi/${doc.videoId}/hqdefault.jpg`} />
+												{/* hqdefault > mqdefault > default */}
+												<Card.Img variant="top" src={`https://img.youtube.com/vi/${doc.videoId}/mqdefault.jpg`} />
 												<Card.Body>
 													<Card.Text>{doc.title}</Card.Text>
 												</Card.Body>

@@ -72,35 +72,4 @@ public class MyController {
     @GetMapping("/doc/static/css/**")
     public void ignoreDocStaticCss() {}
 
-
-    /* ************************************************** */
-    // NOT-IN-USE list
-
-    /*
-    // @GetMapping(value = "/{id}")
-    @GetMapping("/doc/{id}")
-    public MyDocument getDocumentById(@PathVariable String id) {
-
-        logger.info("\n----- [Spring Boot] MyController.getDocumentById(@PathVariable String id) -----");
-
-        MyDocument doc = service.getDocumentById(id);
-
-        logger.info("doc.getId(): {}", doc.getId());
-
-        return doc;
-    }*/
-
-    /*@GetMapping("/documents")
-    public ResponseEntity<?> getAllDocuments() {
-        return new ResponseEntity<>(service.getAllDocuments(), HttpStatus.OK); // 200 응답
-    }*/
-
-    /*
-    @CrossOrigin
-    @GetMapping("/")
-    public String redirect() {
-        return "forward:/index.html";
-    }*/
-
-
 }

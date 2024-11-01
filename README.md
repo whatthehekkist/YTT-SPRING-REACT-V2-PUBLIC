@@ -23,10 +23,15 @@ git clone https://github.com/whatthehekkist/YTT-SPRING-REACT-V2-PUBLIC.git
 
 npm installation at `src/main/frontend`
 ```js
+npm install axios http-proxy-middleware react-bootstrap bootstrap react-router-dom d3 d3-cloud html2pdf.js@0.9.3
+```
+{% comment %}
+```js
 npm install npx -g
 npx create-react-app frontend
 npm install axios http-proxy-middleware react-bootstrap bootstrap react-router-dom d3 d3-cloud html2pdf.js@0.9.3
 ```
+{% endcomment %}
 
 ## Spring React integrated build
 op1) build and run Spring & React (integrated build)
@@ -34,7 +39,7 @@ op1) build and run Spring & React (integrated build)
 
 ## op2) build and run Spring and then React at runtime
 - Spring at `/`: `./gradlew clean bootrun` -> *http://localhost:8080*
-- React at `src/main/frontend`: `npm start` at *./src/main/frontend/* -> *http://localhost:3000*
+- React at `src/main/frontend`: `npm start` -> *http://localhost:3000*
 
 # Refs
 - https://hojun-dev.tistory.com/entry/Spring-Boot-%EB%AC%B4%EB%A3%8C%EB%A1%9C-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0-Koyeb-GitHub
