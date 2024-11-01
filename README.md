@@ -25,13 +25,6 @@ npm installation at `src/main/frontend`
 ```js
 npm install axios http-proxy-middleware react-bootstrap bootstrap react-router-dom d3 d3-cloud html2pdf.js@0.9.3
 ```
-{% comment %}
-```js
-npm install npx -g
-npx create-react-app frontend
-npm install axios http-proxy-middleware react-bootstrap bootstrap react-router-dom d3 d3-cloud html2pdf.js@0.9.3
-```
-{% endcomment %}
 
 ## Spring React integrated build
 op1) build and run Spring & React (integrated build)
