@@ -25,5 +25,7 @@ public class MyDocument {
 @Getter
 class CaptionTracks {
     private String name;
+    private String languageCode;
+    private String summary;
     private String script;
 }

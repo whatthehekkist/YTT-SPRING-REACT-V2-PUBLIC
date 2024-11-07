@@ -88,19 +88,19 @@ const FixedBackground = () => {
 
 	const cardsData = [
 		{
-			link: "https://github.com/whatthehekkist/YTT-SPRING-REACT-V2-PUBLIC",
-			title: "YTT (Spring, React) git",
-			description: "public repo for current project"
+			link: "link",
+			title: "title",
+			description: "description"
 		},
 		{
-			link: "https://ytt-v2.vercel.app/",
-			title: "YTT (nodeJS)",
-			description: "Legacy project in nodeJS"
+			link: "link",
+			title: "title",
+			description: "description"
 		},
 		{
-			link: "https://dev-whatthehekkist.netlify.app/",
-			title: "Blog",
-			description: "some dirty records on CS study"
+			link: "link",
+			title: "title",
+			description: "description"
 		},
 	];
 

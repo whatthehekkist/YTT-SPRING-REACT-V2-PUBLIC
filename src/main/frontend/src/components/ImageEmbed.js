@@ -2,9 +2,9 @@ import React from 'react';
 
 // alt for VideoEmbed.js
 const ImageEmbed = ({ videoId, title }) => {
-	console.log("Components.ImageEmbed----------------");
-	console.log("videoId", videoId);
-	console.log("title", title);
+	// console.log("Components.ImageEmbed----------------");
+	// console.log("videoId", videoId);
+	// console.log("title", title);
 
 	return (
 		<div style={{

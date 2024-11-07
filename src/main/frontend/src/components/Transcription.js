@@ -4,7 +4,7 @@ import LoadingSpinner from './Spinner';
 import TEXTS from '../local-data/Texts';
 import ImageEmbed from './ImageEmbed';
 import WordCloud from './WordCloud';
-import PDFGenerator from './PDFGenerator';
+import SummaryAndPDF from './SummaryAndPDF';
 
 /**
  * @param refs props for scroll event
@@ -18,6 +18,9 @@ const Transcription = ({ refs, doc }) => {
 	const [openScript, setOpenScript] = useState(Array(doc.captionTracks.length).fill(false));
 	const [renderedWordCloud, setRenderedWordCloud] = useState(Array(doc.captionTracks.length).fill(null));
 	const [renderedScript, setRenderedScript] = useState(Array(doc.captionTracks.length).fill(null));
+
+	/* for getting english summary in advance */
+	const [enSummary, setEnSummary] = useState('');
 	
 	// keep initializing the states on change of doc
 	useEffect(() => {
@@ -26,6 +29,20 @@ const Transcription = ({ refs, doc }) => {
 		setRenderedWordCloud(Array(doc.captionTracks.length).fill(null));
 		setRenderedScript(Array(doc.captionTracks.length).fill(null));
 	}, [doc]);
+
+	// enSummary setter 
+	useEffect(() => {
+		// find the 1st matching english summary in doc.captionTracks
+		const regex = /^en(-|$)/; // en, en-US, en-UK...
+		for (const captionTrack of doc.captionTracks) {	
+			const isMatch = regex.test(captionTrack.languageCode);
+			if (isMatch) {
+				console.log("[FOUND] captionTrack.languageCode: ", captionTrack.languageCode);
+				setEnSummary(captionTrack.summary); 
+				break; 
+			}
+		}
+	}, [doc]); 
 
 
 
@@ -99,6 +116,7 @@ const Transcription = ({ refs, doc }) => {
 				{doc && doc.captionTracks.map((captionTrack, captionTracksIndex) => (
 					<Accordion defaultActiveKey={null} key={captionTracksIndex}>
 						<Accordion.Item className='mt-2'>
+
 							<Accordion.Header>{captionTrack.name}</Accordion.Header>
 							<Accordion.Body>
 								<div className="text-center mb-1">
@@ -142,10 +160,12 @@ const Transcription = ({ refs, doc }) => {
 								{/* works nearly the same as above (and no need loading as it's plain text) */}
 								{openScript[captionTracksIndex] && renderedScript[captionTracksIndex] && (
 									<div>
-										{/* call PDFGenerator to render current script in plain text as well as generating pdf in one go */}
-										<PDFGenerator 
+										{/* call SummaryAndPDF to render current script in
+											plain text, summary, and pdf */}
+										<SummaryAndPDF 
 											title={captionTrack.name} 
 											script={renderedScript[captionTracksIndex]} 
+											summary={enSummary}  
 										/>
 									</div>
 								)}
@@ -159,3 +179,4 @@ const Transcription = ({ refs, doc }) => {
 };
 
 export default Transcription;
+
