@@ -62,17 +62,14 @@ public class MyController {
         return new ResponseEntity<>(doc, HttpStatus.OK);
     }
 
-
-    /***
     // ignores some default requests to Spring
-    @GetMapping("favicon.ico")
-    public void ignoreFavicon() {}
+     @GetMapping("favicon.ico")
+     public void ignoreFavicon() {}
 
-    @GetMapping("/doc/favicon.ico")
-    public void ignoreDocFavicon() {}
+     @GetMapping("/doc/favicon.ico")
+     public void ignoreDocFavicon() {}
 
-    @GetMapping("/doc/static/css/**")
-    public void ignoreDocStaticCss() {}
-    ***/
+     @GetMapping("/doc/static/**")
+     public void ignoreDocStaticAll() {}
 
 }
