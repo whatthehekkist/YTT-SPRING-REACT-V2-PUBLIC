@@ -27,5 +27,15 @@ class CaptionTracks {
     private String name;
     private String languageCode;
     private String summary;
+    private String keywords;
     private String script;
+    private List<Recommend> recommends;
+}
+
+@AllArgsConstructor
+@Getter
+class Recommend {
+    private String docId;
+    private String videoId;
+    private String title;
 }

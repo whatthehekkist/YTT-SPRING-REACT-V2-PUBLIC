@@ -2,12 +2,17 @@ import React, { useRef, useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import LoadingSpinner from './Spinner';
 import html2pdf from 'html2pdf.js';
+// import RecommendDocs from './RecommendDocs'
+import RecommendDocsByKeywords from './RecommendDocsByKeywords'
 
 /**
  * @param title props | script title (language name) at current index of doc.captionTracks
  * @param script props | script at current index of doc.captionTracks
  * @param summary props | summarization of the script (English only)
- *  - generated using hugging face transformer (facebook/bart-large-cnn) in django/python script
+ * @param keywords props | relevant/engaging contextual keywords to the summarization (English only)
+ * @param recommends props | plz refer to RecommendDocs.js
+ *  - summary pre-generated using hugging face transformer (text2text-generation, facebook/bart-large-cnn) in django/python script
+ *  - keywords pre-generated using scikit-learn TfidfVectorizer and hugging face transformer (zero-shot-classification, facebook/bart-large-mnli) in django/python script
  *  - saved to documents in the current mongoDB collection 
  * @remarkOnGeneratingPDF 
  *  - script
@@ -15,12 +20,11 @@ import html2pdf from 'html2pdf.js';
  *            causing content cut-off between bottom of page and top of next page (starting from page 2 in general)
  *      - PDF with more than 3 pages also causes content cut-off
  *      - Current alt approach for now: if device is mobile, generate script whose legnth is appropriate to be rendered in a single page only
- *  - script and summary on desktop
- *      - just OK up to 3 pages
- *  - device
- * @returns summary in English, script or PDF by available lang
+ *  - summary
+ *      - is just OK as it is a summary of the script (well, up to 3 pages)
+ * @returns summary/keywords in English, script or PDF by available lang
  */
-const SummaryAndPDF = ({ title, script, summary }) => {
+const SummaryAndPDF = ({ title, script, summary, keywords, recommends }) => {
 
     // states
     const [isMobile, setIsMobile] = useState(false);
@@ -28,13 +32,12 @@ const SummaryAndPDF = ({ title, script, summary }) => {
     const [hideDownloadBtnOnMobile, setHideDownloadBtnOnMobile] = useState(true);
     const [summaryVisible, setSummaryVisible] = useState(false);
     
-    // ref for current DOM element
-    const contentRef = useRef();
+    const contentRef = useRef(); // ref for current DOM element
+    const keywordsArray = keywords.split(",").slice(0, 20); // get N keywords from keywords
 
-    // convert \n to <br/> source text and return formatted text with line breaks
+    // function to convert \n to <br/> in source text and return formatted text with line breaks
     const BreakText = ({ sourceText }) => {
         const formattedText = sourceText.replace(/\n/g, '<br/>');
-    
         return (
             <div dangerouslySetInnerHTML={{ __html: formattedText }} />
         );
@@ -126,6 +129,13 @@ const SummaryAndPDF = ({ title, script, summary }) => {
         boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)',
         transition: 'background-color 0.3s, transform 0.3s'
     };
+
+    const contentRefStyle = {
+        pageBreakInside: 'avoid', 
+        padding: 0,
+        maxWidth: '100%',
+        margin: 'auto'
+    }
     
     return (
         <div style={{ margin: 0 }}> 
@@ -158,19 +168,34 @@ const SummaryAndPDF = ({ title, script, summary }) => {
                 </Button>
             )}
 
-            {/* Target DOM element to be captured as pdf */}
-            <div ref={contentRef} 
-                //  className={ hideDownloadBtnOnMobile ? 'mt-4 mb-1' : '' }
-                 style={{ 
-                    pageBreakInside: 'avoid', 
-                    padding: 0,
-                    maxWidth: '100%',
-                    margin: 'auto'
-                }
-            }>
-                { summary && summaryVisible ? <BreakText sourceText={summary} /> : script } 
-            </div>
-        </div>
+            {/* depending on summaryVisible state, toggle target DOM element to be captured as pdf */}    
+            {summary && summaryVisible ? 
+                <div>
+                    <div ref={contentRef} style={contentRefStyle}>
+                        <BreakText sourceText={summary} /> 
+                    </div>
+                    <div className='mt-3'>
+                        {keywordsArray.map((keyword, index) => (
+                            <span key={index} className='badge bg-light fw-normal me-2'>
+                                <span style={{color: '#aeb2e5'}}>{keyword.trim()}</span>
+                            </span>
+                        ))}
+                    </div>
+
+                    {/* call RecommendDocsByKeywords */}
+                    <div className='py-3'>
+                        <div><RecommendDocsByKeywords recommends={recommends} /></div>
+                        {/* <RecommendDocs recommends={recommends} /> */}
+                    </div>
+                </div>
+                : 
+                <div ref={contentRef} style={contentRefStyle}>
+                    {script} 
+                </div>
+            } 
+            
+        </div>        
+        
     );
 };
 

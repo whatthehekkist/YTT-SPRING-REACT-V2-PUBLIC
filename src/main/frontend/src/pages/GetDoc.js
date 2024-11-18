@@ -60,7 +60,7 @@ const GetDoc = forwardRef(({ refs }) => {
 		<>
 			<ScrollToTranscription />
 			<TranscriptionList refs={refs} randomDocs={randomDocs} />
-			<Transcription refs={refs} doc={doc} />
+			<Transcription refs={refs} doc={doc} randomDocs={randomDocs} />
 		</>
 
 	);

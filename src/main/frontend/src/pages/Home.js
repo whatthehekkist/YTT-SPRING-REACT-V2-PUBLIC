@@ -27,7 +27,7 @@ const Home = forwardRef(({ refs }) => {
 	return (
 		<>
 			<TranscriptionList refs={refs} randomDocs={randomDocs} />
-			<Transcription refs={refs} doc={sampleDoc} />
+			<Transcription refs={refs} doc={sampleDoc} randomDocs={randomDocs} />
 		</>
 
 	);

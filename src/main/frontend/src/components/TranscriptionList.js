@@ -18,7 +18,7 @@ const TranscriptionList = ({ refs, randomDocs }) => {
 
 	// function to send a GET request of a doc
 	const fetchDocHandler = (id) => {
-		(id) ? history(`/doc/${id}`) : alert("something went wrong..try again.");
+		(id) ? history(`/doc/${id}`) : alert(`error while routing to /doc/${id} ... try again.`);
 	};
 
 	// render randomDocs

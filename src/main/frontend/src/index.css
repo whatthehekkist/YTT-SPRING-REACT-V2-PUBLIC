@@ -327,6 +327,41 @@ code {
 } */
 
 
+/*****************************************/
+/* react bootstracp carousel */
+.carousel-control-prev,
+.carousel-control-next {
+    background-color: rgba(173, 172, 172, 0.1); 
+    color: #000000; 
+    border-radius: 3%;
+    /* transition: background-color 0.3s ease, transform 0.3s ease;  */
+}
+
+/***
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background-color: rgba(37, 36, 36, 0.7); 
+    transform: scale(1.015); 
+    color: #fff; 
+} 
+***/
+.carousel-control-prev-icon, 
+.carousel-control-next-icon {
+  border-radius: 10%;
+  padding: 10px;
+  background-color:rgba(61, 61, 61, 0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease; 
+}
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+    background-color: rgba(37, 36, 36, 0.7);
+    transform: scale(1.1); 
+    color: #fff; 
+}
+
+
+
+
 
 
 /* not in use */

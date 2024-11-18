@@ -5,13 +5,15 @@ import TEXTS from '../local-data/Texts';
 import ImageEmbed from './ImageEmbed';
 import WordCloud from './WordCloud';
 import SummaryAndPDF from './SummaryAndPDF';
+import RecommendRandomDocs from './RecommendRandomDocs'
 
 /**
  * @param refs props for scroll event
  * @param doc props for a specific document rendering
+ * @param doc props for random documents rendering in horizontal slick scroll
  * @returns a single document rendered
  */
-const Transcription = ({ refs, doc }) => {
+const Transcription = ({ refs, doc, randomDocs }) => {
 
 	/* declare and init each state with the values as follows to the length of doc.captionTracks */
 	const [openWordCloud, setOpenWordCloud] = useState(Array(doc.captionTracks.length).fill(false));
@@ -19,8 +21,10 @@ const Transcription = ({ refs, doc }) => {
 	const [renderedWordCloud, setRenderedWordCloud] = useState(Array(doc.captionTracks.length).fill(null));
 	const [renderedScript, setRenderedScript] = useState(Array(doc.captionTracks.length).fill(null));
 
-	/* for getting english summary in advance */
+	/* enSummary, enKeywords, and recommendDocs */
 	const [enSummary, setEnSummary] = useState('');
+	const [enKeywords, setEnKeywords] = useState('');
+	const [recommendDocs, setRecommendDocs] = useState([]);
 	
 	// keep initializing the states on change of doc
 	useEffect(() => {
@@ -30,15 +34,18 @@ const Transcription = ({ refs, doc }) => {
 		setRenderedScript(Array(doc.captionTracks.length).fill(null));
 	}, [doc]);
 
-	// enSummary setter 
+	// enSummary, enKeywords, and recommendDocs setter 
 	useEffect(() => {
-		// find the 1st matching english summary in doc.captionTracks
+		// find the 1st matching english languageCode in doc.captionTracks
 		const regex = /^en(-|$)/; // en, en-US, en-UK...
 		for (const captionTrack of doc.captionTracks) {	
 			const isMatch = regex.test(captionTrack.languageCode);
 			if (isMatch) {
 				console.log("[FOUND] captionTrack.languageCode: ", captionTrack.languageCode);
+				// get and set the values for each of the states 
 				setEnSummary(captionTrack.summary); 
+				setEnKeywords(captionTrack.keywords);
+				setRecommendDocs(captionTrack.recommends);
 				break; 
 			}
 		}
@@ -161,11 +168,13 @@ const Transcription = ({ refs, doc }) => {
 								{openScript[captionTracksIndex] && renderedScript[captionTracksIndex] && (
 									<div>
 										{/* call SummaryAndPDF to render current script in
-											plain text, summary, and pdf */}
+											plain text, summary, keywords, recommended documents, and spdf */}
 										<SummaryAndPDF 
 											title={captionTrack.name} 
 											script={renderedScript[captionTracksIndex]} 
 											summary={enSummary}  
+											keywords={enKeywords}
+											recommends={recommendDocs}
 										/>
 									</div>
 								)}
@@ -173,6 +182,22 @@ const Transcription = ({ refs, doc }) => {
 						</Accordion.Item>
 					</Accordion>
 				))}
+
+				{/* call RecommendRandomDocs | for now, it's random document recommendations only */}
+				<div className='mt-5 pt-5' 
+					 style={{
+						opacity: 0.6, 
+						borderTop: '1px solid rgba(0, 0, 0, 0.1)', 
+    					// borderBottom: '1px solid rgba(0, 0, 0, 0.2)',
+						// boxShadow: '1px 4px 0px rgba(0, 0, 0, 0.1)',
+						position: 'relative',
+						overflow: 'hidden',
+					 }}
+				>
+					{/* <RecommendDocs recommends={randomDocs} isGrandParent={true} /> */}
+					<RecommendRandomDocs recommends={randomDocs} />
+				</div>
+
 			</Container>
 		</div>
 	);

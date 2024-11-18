@@ -1,6 +1,5 @@
 package com.example.ytt.service;
 
-import com.example.ytt.controller.MyController;
 import com.example.ytt.domain.MyDocument;
 import com.example.ytt.repository.DocRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Random;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -32,7 +32,7 @@ public class MyService {
 
         try {
             // return repository.findRandomDocs().stream().findFirst().orElse(null);
-            randomDocs = repository.random().getMappedResults();
+            randomDocs = repository.getRandomDocs().getMappedResults();
 
         } catch (DataAccessException dae) {
             logger.error("Data access error on retrieving aggregated results in random: {}", dae.getMessage());
@@ -40,13 +40,23 @@ public class MyService {
         } catch (Exception e) {
             logger.error("Unexpected error on retrieving aggregated results in random: {}", e.getMessage());
         }
-        
         return randomDocs;
     }
 
     @Transactional(readOnly = true)
     public MyDocument getSampleDoc() {
-        return repository.findById("66bd8368a738ab3fae35c7ce")
+
+        String[] ids = {
+                "672d91f0e8e22066b815c006",
+                "66bd8368a738ab3fae35c7ce",
+                "670a2d66a582a4ed85767293",
+                "6735ae3805cb92de1f7f951e",
+                "672086132e5b49bb73bf3c8a"
+        };
+        Random rand = new Random();
+        String docId = ids[rand.nextInt(ids.length)];
+
+        return repository.findById(docId)
                 .orElseThrow(()
                         -> new IllegalArgumentException("MyService.getSampleDoc(): IllegalArgumentException thrown. PLZ CHECK arg"));
     }
@@ -60,10 +70,5 @@ public class MyService {
                 .orElseThrow(()
                         -> new IllegalArgumentException("MyService.getDocumentById(String id): IllegalArgumentException thrown. PLZ CHECK arg"));
     }
-
-    // not in use
-    /*public List<MyDocument> getAllDocuments() {
-        return repository.findAll();
-    }*/
 
 }

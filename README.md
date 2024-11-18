@@ -23,7 +23,7 @@ git clone https://github.com/whatthehekkist/YTT-SPRING-REACT-V2-PUBLIC.git
 
 npm installation at `src/main/frontend`
 ```js
-npm install axios http-proxy-middleware react-bootstrap bootstrap react-router-dom d3 d3-cloud html2pdf.js@0.9.3
+npm install axios http-proxy-middleware react-bootstrap bootstrap react-router-dom d3 d3-cloud html2pdf.js@0.9.3 react-slick slick-carousel 
 ```
 
 ## Spring React integrated build

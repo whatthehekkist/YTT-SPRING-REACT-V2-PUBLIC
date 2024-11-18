@@ -12,7 +12,7 @@ public interface DocRepository extends MongoRepository<MyDocument, String> {
             "{$project: {_id: 1, title: 1, url: 1, videoId: 1}}",
             "{$sample: {size:10}}"
     })
-    AggregationResults<MyDocument> random();
+    AggregationResults<MyDocument> getRandomDocs();
 
 
     /*
