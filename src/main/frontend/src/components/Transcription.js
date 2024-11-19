@@ -5,12 +5,12 @@ import TEXTS from '../local-data/Texts';
 import ImageEmbed from './ImageEmbed';
 import WordCloud from './WordCloud';
 import SummaryAndPDF from './SummaryAndPDF';
-import RecommendRandomDocs from './RecommendRandomDocs'
+// import SlickRecommendRandomDocs from './RecommendRandomDocs'
 
 /**
  * @param refs props for scroll event
  * @param doc props for a specific document rendering
- * @param doc props for random documents rendering in horizontal slick scroll
+ * @param randomDocs [NOT IN USE | ALT] props for random documents rendering in horizontal slick scroll
  * @returns a single document rendered
  */
 const Transcription = ({ refs, doc, randomDocs }) => {
@@ -182,21 +182,6 @@ const Transcription = ({ refs, doc, randomDocs }) => {
 						</Accordion.Item>
 					</Accordion>
 				))}
-
-				{/* call RecommendRandomDocs | for now, it's random document recommendations only */}
-				<div className='mt-5 pt-5' 
-					 style={{
-						opacity: 0.6, 
-						borderTop: '1px solid rgba(0, 0, 0, 0.1)', 
-    					// borderBottom: '1px solid rgba(0, 0, 0, 0.2)',
-						// boxShadow: '1px 4px 0px rgba(0, 0, 0, 0.1)',
-						position: 'relative',
-						overflow: 'hidden',
-					 }}
-				>
-					{/* <RecommendDocs recommends={randomDocs} isGrandParent={true} /> */}
-					<RecommendRandomDocs recommends={randomDocs} />
-				</div>
 
 			</Container>
 		</div>

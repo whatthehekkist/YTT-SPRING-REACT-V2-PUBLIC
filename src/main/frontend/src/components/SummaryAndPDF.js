@@ -2,15 +2,15 @@ import React, { useRef, useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import LoadingSpinner from './Spinner';
 import html2pdf from 'html2pdf.js';
-// import RecommendDocs from './RecommendDocs'
-import RecommendDocsByKeywords from './RecommendDocsByKeywords'
+import SlickRecommendDocsByKeywords from './SlickRecommendDocsByKeywords';
+
 
 /**
  * @param title props | script title (language name) at current index of doc.captionTracks
  * @param script props | script at current index of doc.captionTracks
  * @param summary props | summarization of the script (English only)
- * @param keywords props | relevant/engaging contextual keywords to the summarization (English only)
- * @param recommends props | plz refer to RecommendDocs.js
+ * @param keywords props | relevant/engaging contextual keywords to the summarization (English only) in current document mapped
+ * @param recommends props | plz refer to SlickRecommendDocsByKeywords.js
  *  - summary pre-generated using hugging face transformer (text2text-generation, facebook/bart-large-cnn) in django/python script
  *  - keywords pre-generated using scikit-learn TfidfVectorizer and hugging face transformer (zero-shot-classification, facebook/bart-large-mnli) in django/python script
  *  - saved to documents in the current mongoDB collection 
@@ -182,10 +182,9 @@ const SummaryAndPDF = ({ title, script, summary, keywords, recommends }) => {
                         ))}
                     </div>
 
-                    {/* call RecommendDocsByKeywords */}
+                    {/* call SlickRecommendDocsByKeywords */}
                     <div className='py-3'>
-                        <div><RecommendDocsByKeywords recommends={recommends} /></div>
-                        {/* <RecommendDocs recommends={recommends} /> */}
+                        <SlickRecommendDocsByKeywords recommends={recommends} />
                     </div>
                 </div>
                 : 
