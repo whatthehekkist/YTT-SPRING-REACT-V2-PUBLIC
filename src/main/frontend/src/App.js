@@ -49,20 +49,12 @@ function App() {
 
 						<Route
 							exact path="/"
-							element={
-								<Home refs={sections}
-									titles={["Home", "Transcription List", "Sample Transcription"]}
-								/>
-							}
+							element={ <Home refs={sections} /> }
 						/>
 
 						<Route
 							path="/doc/:id"
-							element={
-								<GetDoc refs={sections}
-									titles={["Home", "Transcription List", "Transcription"]}
-								/>
-							}
+							element={ <GetDoc refs={sections} /> }
 						/>
 
 					</Routes>

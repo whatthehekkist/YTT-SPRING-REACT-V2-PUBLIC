@@ -26,8 +26,8 @@ const Home = forwardRef(({ refs }) => {
 	// call the components TranscriptionList and Transcription
 	return (
 		<>
-			<TranscriptionList refs={refs} randomDocs={randomDocs} />
-			<Transcription refs={refs} doc={sampleDoc} randomDocs={randomDocs} />
+			<TranscriptionList refs={refs}  randomDocs={randomDocs} />
+			<Transcription refs={refs} doc={sampleDoc} />
 		</>
 
 	);

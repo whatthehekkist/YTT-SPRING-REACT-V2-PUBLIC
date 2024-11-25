@@ -37,7 +37,7 @@ const TranscriptionList = ({ refs, randomDocs }) => {
 							{randomDocs && randomDocs.length > 0 ? (
 								randomDocs.map((doc, index) => (
 
-									<Col xs={12} sm={6} md={4} key={index} className="d-flex justify-content-center mx-5 mb-4"> {/* xs: 1열, sm: 2열, md: 3열 */}
+									<Col xs={12} sm={6} md={4} key={index} className="d-flex justify-content-center mx-5 mb-4"> {/* extra small: 1 col, small: 2 cols, medium: 3 cols */}
 										<CardGroup>
 											<Card style={{ width: '18rem', cursor: 'pointer' }}
 												onClick={() => fetchDocHandler(doc.id)}

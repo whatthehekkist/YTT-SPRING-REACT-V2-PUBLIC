@@ -5,15 +5,13 @@ import TEXTS from '../local-data/Texts';
 import ImageEmbed from './ImageEmbed';
 import WordCloud from './WordCloud';
 import SummaryAndPDF from './SummaryAndPDF';
-// import SlickRecommendRandomDocs from './RecommendRandomDocs'
 
 /**
  * @param refs props for scroll event
  * @param doc props for a specific document rendering
- * @param randomDocs [NOT IN USE | ALT] props for random documents rendering in horizontal slick scroll
  * @returns a single document rendered
  */
-const Transcription = ({ refs, doc, randomDocs }) => {
+const Transcription = ({ refs, doc }) => {
 
 	/* declare and init each state with the values as follows to the length of doc.captionTracks */
 	const [openWordCloud, setOpenWordCloud] = useState(Array(doc.captionTracks.length).fill(false));
