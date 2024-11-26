@@ -8,7 +8,8 @@ import Transcription from '../components/Transcription';
 
 const Home = forwardRef(({ refs }) => {
 
-	// reference RandomDocumentsContext and SampleDocumentContext
+	// reference RandomDocumentsContext and SampleDocumentContext 
+	// by explicitly calling useContext initialized with each of the source contexts accordingly
 	const { randomDocs, loadingRandomDocs, errorRandomDocs } = useContext(RandomDocumentsContext);
 	const { sampleDoc, loadingSampleDoc, errorSampleDoc } = useContext(SampleDocumentContext);
 	// console.log("randomDocs:", randomDocs);

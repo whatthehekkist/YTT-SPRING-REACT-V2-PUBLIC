@@ -11,6 +11,7 @@ import Transcription from '../components/Transcription';
 const GetDoc = forwardRef(({ refs }) => {
 
 	// reference RandomDocumentsContext
+	// by explicitly calling useContext initialized with each of the source contexts accordingly
 	const { randomDocs, loadingRandomDocs, errorRandomDocs } = useContext(RandomDocumentsContext);
 
 	// extract the path parameter :id from /doc/:id

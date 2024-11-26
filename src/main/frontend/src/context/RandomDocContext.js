@@ -1,9 +1,10 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
-// a context that fetches data from the endpoint /randomdocs in Spring
+// context reference for children components
 export const RandomDocumentsContext = createContext();
 
+// a context provider that fetches data from the endpoint /randomdocs in Spring
 const RandomDocumentsProvider = ({ children }) => {
 	const [randomDocs, setDocuments] = useState([]);
 	const [loadingRandomDocs, setLoading] = useState(true);
@@ -29,7 +30,7 @@ const RandomDocumentsProvider = ({ children }) => {
 
 	return (
 		<>
-			{/* <pre>{JSON.stringify(randomDocs, null, 2)}</pre>  */}
+			{/* define context provider for child components (subscriber to the context) to access the props value */}
 			<RandomDocumentsContext.Provider value={{ randomDocs, loadingRandomDocs, errorRandomDocs }}>
 				{children}
 			</RandomDocumentsContext.Provider>

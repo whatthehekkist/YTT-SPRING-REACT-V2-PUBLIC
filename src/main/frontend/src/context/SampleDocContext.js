@@ -1,9 +1,10 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
-// a context that fetches data from the endpoint /sampledoc in Spring
+// context reference for children components
 export const SampleDocumentContext = createContext();
 
+// a context provider that fetches data from the endpoint /sampledoc in Spring
 const SampleDocumentProvider = ({ children }) => {
 	const [sampleDoc, setDocuments] = useState([]);
 	const [loadingSampleDoc, setLoading] = useState(true);
@@ -29,7 +30,7 @@ const SampleDocumentProvider = ({ children }) => {
 
 	return (
 		<>
-			{/* <pre>{JSON.stringify(sampleDoc, null, 2)}</pre>          */}
+			{/* define context provider for child components (subscriber to the context) to access the props value */}
 			<SampleDocumentContext.Provider value={{ sampleDoc, loadingSampleDoc, errorSampleDoc }}>
 				{children}
 			</SampleDocumentContext.Provider>
