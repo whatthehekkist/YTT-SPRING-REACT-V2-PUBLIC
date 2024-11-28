@@ -8,7 +8,7 @@ import TranscriptionList from '../components/TranscriptionList';
 import Transcription from '../components/Transcription';
 
 
-const GetDoc = forwardRef(({ refs }) => {
+const GetDoc = ({ refs }) => {
 
 	// reference RandomDocumentsContext
 	// by explicitly calling useContext initialized with each of the source contexts accordingly
@@ -66,6 +66,6 @@ const GetDoc = forwardRef(({ refs }) => {
 
 	);
 
-});
+};
 
 export default GetDoc;

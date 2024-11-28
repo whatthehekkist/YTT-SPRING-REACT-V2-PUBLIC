@@ -6,7 +6,7 @@ import TranscriptionList from '../components/TranscriptionList';
 import Transcription from '../components/Transcription';
 
 
-const Home = forwardRef(({ refs }) => {
+const Home = ({ refs }) => {
 
 	// reference RandomDocumentsContext and SampleDocumentContext 
 	// by explicitly calling useContext initialized with each of the source contexts accordingly
@@ -33,6 +33,6 @@ const Home = forwardRef(({ refs }) => {
 
 	);
 
-});
+};
 
 export default Home;
